@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="r86ry8TJMrzBwxZ9kA6YAYDc7mxfmMRz8oLlBJ1iLx0" />
+  <title>Admin Dashboard | The HatchPoint Innovations Challenge: Nyansapo Edition</title>
+  <meta name="description" content="Secure administrative access to manage challenge tracks, registrations, and form configurations.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <!-- Google Fonts for Design System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,400..700;1,400..700&family=Inter+Tight:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Near Challenge Design Tokens -->
+  <link rel="stylesheet" href="near challenge/variables.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="fal-layout fal-admin-page" style="min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Secure Login View (Shown when not authenticated) -->
+  <main id="admin-login-view" class="auth-main">
+    <!-- LOGIN CARD -->
+    <div class="auth-card" id="login-card">
+      <div class="fal-reg-hero-banner" style="padding: 26px 28px 24px;">
+        <div class="fal-reg-hero-top" style="margin-bottom: 14px;">
+          <span class="fal-reg-eyebrow">
+            <i class="fa-solid fa-shield-halved"></i> PORTAL // ADMIN AUTHENTICATION
+          </span>
+          <a href="index.html" class="logo" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--color-ink-black);">
+            <img src="favicon.png" alt="HatchPoint Logo" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+            <span style="font-family: var(--font-focal); font-weight: 800; font-size: 14px; letter-spacing: -0.03em;">HATCHPOINT</span>
+          </a>
+        </div>
+        <div class="page-logos fal-reg-partner-logos" style="margin-bottom: 12px;">
+          <img src="logo_knust.png" alt="KNUST Logo" style="height: 20px; object-fit: contain;">
+          <span class="fal-logo-sep"></span>
+          <img src="logo_ksb.png" alt="KSB Logo" style="height: 20px; object-fit: contain;">
+        </div>
+        <h2 class="fal-reg-title" style="font-size: 28px; margin-bottom: 6px;">Admin Workspace</h2>
+        <p class="fal-reg-subtitle" style="font-size: 13.5px;">Sign in to manage challenge tracks, team registrations, and ecosystem configurations.</p>
+      </div>
+      <div class="fal-admin-auth-body">
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-control" placeholder="name@company.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="login-password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+              <button type="button" class="password-toggle-btn" aria-label="Toggle password visibility" data-target="login-password" tabindex="-1">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="fal-btn-dark btn-block" style="width: 100%; justify-content: center; padding: 13px 20px; font-size: 15px; margin-top: 6px;">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In to Workspace
+          </button>
+        </form>
+        <div class="fal-admin-auth-links">
+          <div id="signup-toggle-container">
+            <span>Don't have an admin account? <a href="#" id="to-signup-btn">Sign Up</a></span>
+          </div>
+          <div>
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Homepage</a>
+          </div>
+        </div>
+        <div class="fal-admin-security-strip">
+          <i class="fa-solid fa-lock"></i> Restricted access // Admin authorization required
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGN UP CARD -->
+    <div class="auth-card" id="signup-card" style="display: none;">
+      <div class="fal-reg-hero-banner" style="padding: 26px 28px 24px;">
+        <div class="fal-reg-hero-top" style="margin-bottom: 14px;">
+          <span class="fal-reg-eyebrow">
+            <i class="fa-solid fa-user-shield"></i> PORTAL // NEW ADMIN REGISTRATION
+          </span>
+          <a href="index.html" class="logo" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--color-ink-black);">
+            <img src="favicon.png" alt="HatchPoint Logo" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+            <span style="font-family: var(--font-focal); font-weight: 800; font-size: 14px; letter-spacing: -0.03em;">HATCHPOINT</span>
+          </a>
+        </div>
+        <h2 class="fal-reg-title" style="font-size: 28px; margin-bottom: 6px;">Admin Sign Up</h2>
+        <p class="fal-reg-subtitle" style="font-size: 13.5px;">Register a new administrator profile to manage the Nyansapo Edition ecosystem.</p>
+      </div>
+      <div class="fal-admin-auth-body">
+        <form id="signup-form">
+          <div class="form-group">
+            <label for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" class="form-control" placeholder="admin@domain.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="signup-password" class="form-control" placeholder="••••••••" required autocomplete="new-password">
+              <button type="button" class="password-toggle-btn" aria-label="Toggle password visibility" data-target="signup-password" tabindex="-1">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm-password">Confirm Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="signup-confirm-password" class="form-control" placeholder="••••••••" required autocomplete="new-password">
+              <button type="button" class="password-toggle-btn" aria-label="Toggle password visibility" data-target="signup-confirm-password" tabindex="-1">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="fal-btn-dark btn-block" style="width: 100%; justify-content: center; padding: 13px 20px; font-size: 15px; margin-top: 6px;">
+            <i class="fa-solid fa-user-plus"></i> Create Admin Account
+          </button>
+        </form>
+        <div class="fal-admin-auth-links">
+          <div>
+            <span>Already have an admin account? <a href="#" id="to-login-btn">Sign In</a></span>
+          </div>
+          <div>
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Homepage</a>
+          </div>
+        </div>
+        <div class="fal-admin-security-strip">
+          <i class="fa-solid fa-lock"></i> Restricted access // Admin authorization required
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Dashboard view (Shown only to admins) -->
+  <div id="admin-dashboard-view" style="display: none; flex: 1; flex-direction: column;">
+    <!-- Mobile Top Header Bar -->
+    <header class="admin-mobile-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button id="admin-mobile-menu-btn" style="background: transparent; border: none; font-size: 20px; color: var(--text-main); cursor: pointer; padding: 6px 8px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm);" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <img src="favicon.png" alt="HatchPoint Logo" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+          <span id="admin-mobile-tab-title" style="font-size: 15px; font-weight: 700; color: var(--text-main); max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Analytics Overview</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="avatar" style="width: 32px; height: 32px; font-size: 12px;">AD</div>
+      </div>
+    </header>
+
+    <!-- Sidebar Backdrop Overlay -->
+    <div id="admin-sidebar-overlay" class="portal-sidebar-overlay"></div>
+
+    <!-- Floating Drawer Toggle -->
+    <button id="admin-drawer-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: var(--primary); color: white; border: none; border-radius: 50%; width: 48px; height: 48px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; font-size: 18px;" title="Toggle Sidebar Navigation"><i class="fa-solid fa-bars"></i></button>
+
+    <div class="portal-layout" style="flex: 1;">
+      <!-- Sidebar -->
+      <aside class="portal-sidebar">
+        <div class="portal-sidebar-inner" style="overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 2;">
+          <div class="sidebar-top">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 8px 14px; border-bottom: 1px solid var(--color-hairline-gray, #e5e7eb); margin-bottom: 16px;">
+              <a href="index.html" class="logo fal-logo-link" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                <img src="favicon.png" alt="HatchPoint Logo" class="fal-logo-img" style="width: 26px; height: 26px; border-radius: 4px;">
+                <span class="fal-logo-text" style="font-size: 15px;">HATCHPOINT</span>
+                <span class="fal-logo-badge" style="font-size: 9px; padding: 2px 6px;">ADMIN</span>
+              </a>
+            </div>
+            <div class="portal-user-profile">
+              <div class="avatar">AD</div>
+              <div class="user-info">
+                <span class="user-name">Admin Coordinator</span>
+                <span class="user-role">Lead Organizer</span>
+              </div>
+            </div>
+            <ul class="sidebar-menu">
+              <li class="sidebar-item active" data-admin-tab="overview"><i class="fa-solid fa-chart-pie"></i> Analytics Overview</li>
+              <li class="sidebar-item" data-admin-tab="applicants"><i class="fa-solid fa-id-card"></i> Applicants</li>
+              <li class="sidebar-item" data-admin-tab="news-compose"><i class="fa-solid fa-pen-nib"></i> Compose News</li>
+              <li class="sidebar-item" data-admin-tab="form-config"><i class="fa-solid fa-sliders"></i> Form Configurator</li>
+              <li class="sidebar-item" data-admin-tab="tracks-config"><i class="fa-solid fa-network-wired"></i> Manage Tracks</li>
+              <li class="sidebar-item" data-admin-tab="features-config"><i class="fa-solid fa-star"></i> Manage Features</li>
+              <li class="sidebar-item" data-admin-tab="timeline-config"><i class="fa-solid fa-clock-rotate-left"></i> Manage Timeline</li>
+              <li class="sidebar-item" data-admin-tab="rewards-config"><i class="fa-solid fa-gift"></i> Manage Rewards</li>
+              <li class="sidebar-item" data-admin-tab="legal-config"><i class="fa-solid fa-gavel"></i> Manage Legal</li>
+              <li class="sidebar-item" data-admin-tab="resources-config"><i class="fa-solid fa-folder-open"></i> Manage Resources</li>
+              <li class="sidebar-item" data-admin-tab="tickets-config"><i class="fa-solid fa-ticket"></i> Manage Tickets</li>
+              <li class="sidebar-item" data-admin-tab="sponsors-config"><i class="fa-solid fa-handshake"></i> Manage Sponsors</li>
+              <li class="sidebar-item" data-admin-tab="bulk-email"><i class="fa-solid fa-paper-plane"></i> Bulk Email</li>
+              <li class="sidebar-item" data-admin-tab="support-chat"><i class="fa-solid fa-comments"></i> Support Chat</li>
+            </ul>
+          </div>
+          <button class="sidebar-item" id="admin-logout-btn" style="color: var(--danger); width: 100%; border: none; background: transparent; cursor: pointer; text-align: left; margin-bottom: 24px;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+        </div>
+      </aside>
+
+      <!-- Right Content Area -->
+      <main class="portal-content">
+        <!-- ADMIN TAB: OVERVIEW -->
+        <div class="admin-tab-content active" id="admin-tab-overview">
+          <div class="portal-header">
+            <h2>Ecosystem Analytics</h2>
+            <div>
+              <button class="btn btn-outline btn-sm" id="admin-copy-share-btn" style="color: var(--primary); border-color: var(--primary); margin-right: 8px;"><i class="fa-solid fa-link"></i> Copy Share Link</button>
+              <button class="btn btn-outline btn-sm" id="admin-reset-traffic-btn" style="color: var(--warning); border-color: var(--warning); margin-right: 8px;"><i class="fa-solid fa-rotate-left"></i> Reset Traffic</button>
+              <button class="btn btn-secondary btn-sm" id="admin-export-btn"><i class="fa-solid fa-file-csv"></i> Export CSV Data</button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="portal-grid-analytics">
+            <div class="analytic-card">
+              <div class="analytic-num" id="admin-stat-registrations">0</div>
+              <div class="analytic-title">Total Registrants</div>
+            </div>
+            <div class="analytic-card">
+              <div class="analytic-num" id="admin-stat-teams">0</div>
+              <div class="analytic-title">Created Teams</div>
+            </div>
+            <div class="analytic-card">
+              <div class="analytic-num" id="admin-stat-submissions">0</div>
+              <div class="analytic-title">Project Submissions</div>
+            </div>
+            <div class="analytic-card">
+              <div class="analytic-num" id="admin-stat-tracks">0</div>
+              <div class="analytic-title">Active tracks</div>
+            </div>
+            <div class="analytic-card">
+              <div class="analytic-num" id="admin-stat-page-views">0</div>
+              <div class="analytic-title">Total Page Views</div>
+              <button class="btn btn-outline btn-sm" id="admin-view-traffic-btn" style="margin-top: 12px; width: 100%; font-size: 11px; padding: 4px;">View More</button>
+            </div>
+            <div class="analytic-card">
+              <div class="analytic-num" id="admin-stat-shared-clicks">0</div>
+              <div class="analytic-title">Shared Link Clicks</div>
+            </div>
+          </div>
+
+          <div class="grid-2" style="align-items: start;">
+            <!-- Tracks breakdown graph simulation -->
+            <div class="card">
+              <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-chart-column" style="color: var(--primary);"></i> Track Distribution</h3>
+              <div id="admin-chart-distribution" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Dynamic bar breakdown -->
+              </div>
+            </div>
+            <!-- Submission statuses card -->
+            <div class="card">
+              <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-list-check" style="color: var(--secondary);"></i> Submission Ratios</h3>
+              <div id="admin-submission-ratios" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Ratios -->
+              </div>
+            </div>
+          </div>
+
+          <!-- System Security & Settings card -->
+          <div class="card" style="margin-top: 24px;">
+            <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> System Security & Access</h3>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 16px;">
+              Control whether new organizers can sign up on the login screen. Disabling this option prevents unauthorized admin registration.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-app);">
+              <div>
+                <span style="font-weight: 600; font-size: 14px; color: var(--text-main);">Admin Self-Registration</span>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">Status: <span id="signup-status-badge" class="badge badge-success">Enabled</span></div>
+              </div>
+              <button class="btn btn-secondary" id="toggle-signup-btn" style="min-width: 200px;"><i class="fa-solid fa-toggle-on"></i> Toggle Signup Option</button>
+            </div>
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-app); margin-top: 12px;">
+              <div>
+                <span style="font-weight: 600; font-size: 14px; color: var(--text-main);">Admin Portal Shortcut Combo</span>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">Set a custom keyboard combination (3 to 4 keys) to secretly open the admin login page from anywhere. To avoid native browser conflicts, use combinations like <kbd>Alt + Shift + X</kbd>.</div>
+                
+                <!-- Display Mode -->
+                <div style="display: flex; gap: 6px; margin-top: 8px;" id="admin-combo-display-area">
+                  <div id="admin-combo-display" style="display: flex; gap: 6px;"><span class="badge badge-info">None Set</span></div>
+                </div>
+                
+                <!-- Record Mode -->
+                <div id="admin-combo-record-area" style="display: none; align-items: center; gap: 8px; margin-top: 8px;">
+                  <span id="combo-recording-display" style="padding: 4px 8px; background: var(--bg-card); border: 1px dashed var(--warning); border-radius: 4px; font-family: monospace; font-size: 11px; color: var(--warning); font-weight: 700; text-transform: uppercase;">Press Keys...</span>
+                  <button class="btn btn-primary btn-sm" id="btn-set-combo" style="padding: 6px 12px; font-size: 12px;"><i class="fa-solid fa-check"></i> Set Combo</button>
+                  <button class="btn btn-outline btn-sm" id="btn-cancel-combo" style="padding: 6px 12px; font-size: 12px;"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                </div>
+              </div>
+              <button class="btn btn-secondary" id="btn-record-combo" style="min-width: 200px;"><i class="fa-solid fa-keyboard"></i> Record New Combo</button>
+            </div>
+          </div>
+
+          <!-- Landing Page Hero Configuration Card -->
+          <div class="card" style="margin-top: 24px;">
+            <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-sliders" style="color: var(--secondary);"></i> Landing Page Header Stats</h3>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 16px;">
+              Configure the participant count mode and the deadline countdown target date for the landing page hero section.
+            </p>
+            <form id="admin-landing-stats-form">
+              <div class="form-row">
+                <div class="form-group" style="flex: 1;">
+                  <label for="admin-stats-participants-mode">Participants Count Mode</label>
+                  <select id="admin-stats-participants-mode" class="form-control" required>
+                    <option value="dynamic">Dynamic (Calculate from Database)</option>
+                    <option value="manual">Manual Override</option>
+                  </select>
+                </div>
+                <div class="form-group" id="admin-stats-manual-group" style="display: none; flex: 1;">
+                  <label for="admin-stats-participants-override">Participants Override Value</label>
+                  <input type="text" id="admin-stats-participants-override" class="form-control" placeholder="e.g. 1,240+">
+                </div>
+              </div>
+              <div class="form-row" style="margin-top: 16px;">
+                <div class="form-group" style="flex: 1;">
+                  <label for="admin-stats-submissions-mode">Submissions Count Mode</label>
+                  <select id="admin-stats-submissions-mode" class="form-control" required>
+                    <option value="dynamic">Dynamic (Calculate from Database)</option>
+                    <option value="manual">Manual Override</option>
+                  </select>
+                </div>
+                <div class="form-group" id="admin-stats-submissions-manual-group" style="display: none; flex: 1;">
+                  <label for="admin-stats-submissions-override">Submissions Override Value</label>
+                  <input type="text" id="admin-stats-submissions-override" class="form-control" placeholder="e.g. 150+">
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 16px;">
+                <label for="admin-stats-countdown-date">Countdown Target Deadline</label>
+                <input type="datetime-local" id="admin-stats-countdown-date" class="form-control" required>
+              </div>
+              <div class="form-group" style="margin-top: 16px; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="admin-stats-show-countdown" checked style="width: 18px; height: 18px; cursor: pointer;">
+                <label for="admin-stats-show-countdown" style="margin: 0; cursor: pointer; font-weight: 500;">Show Live Countdown Timer on Landing Page</label>
+              </div>
+              <div class="form-group" style="margin-top: 16px; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="admin-stats-show-leaderboard" style="width: 18px; height: 18px; cursor: pointer;">
+                <label for="admin-stats-show-leaderboard" style="margin: 0; cursor: pointer; font-weight: 500;">Show Shortlist Leaderboard Widget</label>
+              </div>
+              <div class="form-group" style="margin-top: 16px; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="admin-stats-show-prizes" checked style="width: 18px; height: 18px; cursor: pointer;">
+                <label for="admin-stats-show-prizes" style="margin: 0; cursor: pointer; font-weight: 500;">Show Rewards & Prizes Section on Landing Page</label>
+              </div>
+              <button type="submit" class="btn btn-primary" style="margin-top: 16px;"><i class="fa-solid fa-floppy-disk"></i> Save Header Stats</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: APPLICANTS -->
+        <div class="admin-tab-content" id="admin-tab-applicants" style="display: none;">
+          <div class="portal-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <h2>Applicant Manager</h2>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <button class="btn btn-secondary btn-sm" id="admin-export-pdf-btn" style="font-weight: 600;"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+              <button class="btn btn-primary btn-sm" id="admin-share-leaderboard-btn" style="font-weight: 600;"><i class="fa-solid fa-trophy"></i> Share Leaderboard</button>
+              <button class="btn btn-outline btn-sm" id="admin-delete-all-applicants-btn" style="color: var(--danger); border-color: var(--danger); font-weight: 600;"><i class="fa-solid fa-trash-can"></i> Delete All Applicants</button>
+            </div>
+          </div>
+          
+          <!-- Filter Controls -->
+          <div style="display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; background: var(--bg-card); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <div style="flex: 2; min-width: 200px; display: flex; flex-direction: column; gap: 6px;">
+              <label for="admin-search-input" style="font-size: 11px; text-transform: uppercase; color: var(--text-light); font-weight: 600;">Search Team / Member</label>
+              <input type="text" id="admin-search-input" class="form-control" placeholder="Search by team, email or name..." style="font-size: 13px; padding: 8px 12px; height: 38px;">
+            </div>
+            
+            <div style="flex: 1; min-width: 140px; display: flex; flex-direction: column; gap: 6px;">
+              <label for="admin-filter-time" style="font-size: 11px; text-transform: uppercase; color: var(--text-light); font-weight: 600;">Submitted</label>
+              <select id="admin-filter-time" class="form-control" style="font-size: 13px; padding: 0 12px; height: 38px; cursor: pointer;">
+                <option value="all" selected>All Time</option>
+                <option value="1h">Past 1 Hour</option>
+                <option value="24h">Past 24 Hours</option>
+                <option value="7d">Past 7 Days</option>
+                <option value="30d">Past 30 Days</option>
+              </select>
+            </div>
+
+            <div style="flex: 1; min-width: 140px; display: flex; flex-direction: column; gap: 6px;">
+              <label for="admin-filter-track" style="font-size: 11px; text-transform: uppercase; color: var(--text-light); font-weight: 600;">Track</label>
+              <select id="admin-filter-track" class="form-control" style="font-size: 13px; padding: 0 12px; height: 38px; cursor: pointer;">
+                <option value="all" selected>All Tracks</option>
+                <option value="open">Open Track</option>
+              </select>
+            </div>
+
+            <div style="flex: 1; min-width: 140px; display: flex; flex-direction: column; gap: 6px;">
+              <label for="admin-filter-status" style="font-size: 11px; text-transform: uppercase; color: var(--text-light); font-weight: 600;">Status</label>
+              <select id="admin-filter-status" class="form-control" style="font-size: 13px; padding: 0 12px; height: 38px; cursor: pointer;">
+                <option value="all" selected>All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+
+            <div style="flex: 1; min-width: 140px; display: flex; flex-direction: column; gap: 6px;">
+              <label for="admin-sort-by" style="font-size: 11px; text-transform: uppercase; color: var(--text-light); font-weight: 600;">Sort By</label>
+              <select id="admin-sort-by" class="form-control" style="font-size: 13px; padding: 0 12px; height: 38px; cursor: pointer;">
+                <option value="latest" selected>Latest Submission</option>
+                <option value="oldest">Oldest Submission</option>
+                <option value="score-desc">Highest Grade</option>
+                <option value="score-asc">Lowest Grade</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="table-scroll-container">
+            <table class="project-list-table">
+              <thead>
+                <tr>
+                  <th>Project & Team</th>
+                  <th>Competitors</th>
+                  <th>Track</th>
+                  <th>Status</th>
+                  <th>Score / Grade</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-applicants-table-body">
+                <!-- Dynamic project listings -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: NEWS COMPOSE -->
+        <div class="admin-tab-content" id="admin-tab-news-compose" style="display: none;">
+          <div class="portal-header">
+            <h2>News Feed Management</h2>
+          </div>
+          
+          <div class="grid-2" style="align-items: start; gap: 24px;">
+            <!-- Column 1: Compose / Edit Form -->
+            <div class="card">
+              <h3 id="news-form-title" style="margin-bottom: 16px;"><i class="fa-solid fa-pen-to-square"></i> Compose News Article</h3>
+              <form id="admin-news-form">
+                <input type="hidden" id="news-edit-id" value="">
+                
+                <div class="form-group">
+                  <label for="news-title">Article Title</label>
+                  <input type="text" id="news-title" class="form-control" placeholder="e.g. Workshop: Pitching Your Prototype to Judges" required>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="news-cat-select">Category</label>
+                    <select id="news-cat-select" class="form-control" required>
+                      <option value="Announcements">Announcements</option>
+                      <option value="Workshops">Workshops</option>
+                      <option value="Deadlines">Deadlines</option>
+                      <option value="Success Stories">Success Stories</option>
+                      <option value="Partner News">Partner News</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="news-img-select">Cover Image Topic (Fallback)</label>
+                    <select id="news-img-select" class="form-control" required>
+                      <option value="code">Development / Code</option>
+                      <option value="meeting">Team Workshop / Collaboration</option>
+                      <option value="presentation">Presentation / Pitching</option>
+                      <option value="launch">Rocket Launch / Milestones</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="news-img-file">Upload Custom Cover Image (Optional)</label>
+                  <input type="file" id="news-img-file" class="form-control" accept="image/*">
+                  <span id="news-current-img-url" style="font-size: 11px; display: none; color: var(--success); margin-top: 4px; font-weight: 500;"></span>
+                </div>
+                
+                <div class="form-group">
+                  <label for="news-body-content">Article Body</label>
+                  <textarea id="news-body-content" class="form-control" rows="8" placeholder="Write news updates, workshop links, or timeline announcements here..." required></textarea>
+                </div>
+                
+                <div style="display: flex; gap: 12px; align-items: center;">
+                  <button type="submit" id="btn-news-submit" class="btn btn-primary" style="flex: 1;"><i class="fa-solid fa-paper-plane"></i> Publish Article</button>
+                  <button type="button" id="btn-news-cancel" class="btn btn-secondary" style="display: none; padding: 10px 16px;"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                </div>
+              </form>
+            </div>
+            
+            <!-- Column 2: Published Articles List -->
+            <div class="card">
+              <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-rectangle-list"></i> Published Articles</h3>
+              <div id="admin-news-list" style="display: flex; flex-direction: column; gap: 16px; max-height: 650px; overflow-y: auto; padding-right: 4px;">
+                <!-- News list dynamically loaded -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: FORM CONFIGURATOR -->
+        <div class="admin-tab-content" id="admin-tab-form-config" style="display: none;">
+          <div class="portal-header">
+            <h2>Registration Form Configurator</h2>
+          </div>
+          
+          <!-- Form Templates Card -->
+          <div class="card" style="margin-bottom: 24px;">
+            <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-list-check"></i> Form Templates</h3>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 16px;">Create multiple form configurations. You can swap templates to be the active main form, or share direct links to specific templates.</p>
+            <form id="admin-create-form-template" style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+              <input type="text" id="admin-new-form-title" class="form-control" placeholder="e.g. Mentor Registration Form" required style="flex: 1; min-width: 250px;">
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create Template</button>
+            </form>
+            <div id="admin-forms-list" style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="empty-state"><i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; color: var(--primary);"></i><p>Loading templates...</p></div>
+            </div>
+          </div>
+
+          <div class="grid-2" style="align-items: start;">
+            <!-- Column 1: Config & Deadline -->
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+              <!-- Add Field Card -->
+              <div class="card">
+                <h3 style="margin-bottom: 16px;">Add Custom Field</h3>
+                <p style="font-size: 13px; color: var(--text-light); margin-bottom: 20px;">
+                  Define new input parameters that teams must submit during registration.
+                </p>
+                <form id="admin-add-field-form">
+                  <div class="form-group">
+                    <label for="admin-field-label">Field Label</label>
+                    <input type="text" id="admin-field-label" class="form-control" placeholder="e.g. GitHub Repository" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="admin-field-type">Input Type</label>
+                    <select id="admin-field-type" class="form-control" required>
+                      <option value="text">Text Input</option>
+                      <option value="url">URL Link</option>
+                      <option value="number">Number</option>
+                      <option value="email">Email</option>
+                      <option value="file">File Upload (.docx, .pdf, .zip)</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Add Field</button>
+                </form>
+              </div>
+
+              <!-- Deadline Control Card -->
+              <div class="card">
+                <h3 style="margin-bottom: 16px;">Registration Deadline Controls</h3>
+                <p style="font-size: 13px; color: var(--text-light); margin-bottom: 20px;">
+                  Toggle registration status to restrict new submissions after the deadline.
+                </p>
+                <form id="admin-deadline-form">
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-app); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 16px;">
+                    <label for="admin-registration-closed" style="font-weight: 600; font-size: 13px; color: var(--text-main); cursor: pointer; margin: 0;">
+                      <i class="fa-solid fa-lock" style="color: var(--danger); margin-right: 6px;"></i> Close Registration (Deadline Passed)
+                    </label>
+                    <input type="checkbox" id="admin-registration-closed" style="width: 20px; height: 20px; cursor: pointer;">
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-app); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 16px;">
+                    <label for="admin-registration-hide-tag" style="font-weight: 600; font-size: 13px; color: var(--text-main); cursor: pointer; margin: 0;">
+                      <i class="fa-solid fa-eye-slash" style="color: var(--text-muted); margin-right: 6px;"></i> Hide Registration Status Tag Completely
+                    </label>
+                    <input type="checkbox" id="admin-registration-hide-tag" style="width: 20px; height: 20px; cursor: pointer;">
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-app); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 16px;">
+                    <label for="admin-registration-swap-nav" style="font-weight: 600; font-size: 13px; color: var(--text-main); cursor: pointer; margin: 0;">
+                      <i class="fa-solid fa-trophy" style="color: var(--warning); margin-right: 6px;"></i> Swap Register Nav to Leaderboard
+                    </label>
+                    <input type="checkbox" id="admin-registration-swap-nav" style="width: 20px; height: 20px; cursor: pointer;">
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" id="admin-save-deadline-btn">Save Status</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Active Fields Card -->
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 id="admin-fields-list-title">Active Custom Fields (Global Form)</h3>
+                <button class="btn btn-outline btn-sm" id="admin-reset-editor-btn" style="display: none; font-size: 11px;"><i class="fa-solid fa-rotate-left"></i> Back to Global</button>
+              </div>
+              <div id="admin-active-fields-list" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Dynamic fields loaded from Firebase config doc -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: MANAGE TRACKS -->
+        <div class="admin-tab-content" id="admin-tab-tracks-config" style="display: none;">
+          <div class="portal-header">
+            <h2>Challenge Tracks Manager</h2>
+          </div>
+          
+          <div class="grid-2" style="align-items: start;">
+            <!-- Save/Edit Track Card -->
+            <div class="card">
+              <h3 id="admin-track-form-title" style="margin-bottom: 16px;">Add New Challenge Track</h3>
+              <form id="admin-track-form">
+                <input type="hidden" id="admin-track-edit-id" value="">
+                <div class="form-group">
+                  <label for="admin-track-name">Track Name</label>
+                  <input type="text" id="admin-track-name" class="form-control" placeholder="e.g. Clean Energy & Environment" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-track-id">Track Unique Key / ID</label>
+                  <input type="text" id="admin-track-id" class="form-control" placeholder="e.g. clean-energy (auto-generated from name if blank)">
+                </div>
+                <div class="form-group">
+                  <label for="admin-track-icon">FontAwesome Icon Class</label>
+                  <input type="text" id="admin-track-icon" class="form-control" placeholder="e.g. fa-leaf, fa-wallet, fa-heart-pulse" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-track-desc">Description</label>
+                  <textarea id="admin-track-desc" class="form-control" style="min-height: 80px;" placeholder="Describe what focus projects this track covers..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="admin-track-image">Cover/Background Image (Optional)</label>
+                  <input type="file" id="admin-track-image" class="form-control" accept="image/*">
+                  <img id="admin-track-image-preview" src="" style="max-width: 100%; max-height: 120px; display: none; margin-top: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                  <div style="display: flex; gap: 8px; margin-top: 8px; align-items: center;">
+                    <button type="button" class="btn btn-secondary btn-sm" id="admin-track-image-remove" style="display: none;">Remove Image</button>
+                    <input type="checkbox" id="admin-track-image-hide" style="width: 16px; height: 16px; cursor: pointer; display: none;">
+                    <label for="admin-track-image-hide" id="admin-track-image-hide-label" style="margin: 0; cursor: pointer; font-size: 13px; color: var(--text-muted); display: none;">Hide Image on Frontend</label>
+                  </div>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 8px; margin-top: 12px; margin-bottom: 16px;">
+                  <input type="checkbox" id="admin-track-visible" checked style="width: 16px; height: 16px; cursor: pointer;">
+                  <label for="admin-track-visible" style="margin: 0; cursor: pointer; font-weight: 500;">Visible to Applicants</label>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button type="submit" class="btn btn-primary" style="flex: 1;" id="admin-track-save-btn">Save Track</button>
+                  <button type="button" class="btn btn-secondary" style="display: none;" id="admin-track-cancel-btn">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Active Tracks List Card -->
+            <div class="card">
+              <h3 style="margin-bottom: 16px;">Existing Challenge Tracks</h3>
+              <div id="admin-tracks-list" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Dynamic tracks loaded from Firestore -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: MANAGE FEATURES -->
+        <div class="admin-tab-content" id="admin-tab-features-config" style="display: none;">
+          <div class="portal-header">
+            <h2>Platform Features Manager</h2>
+          </div>
+          
+          <div class="grid-2" style="align-items: start;">
+            <!-- Save/Edit Feature Card -->
+            <div class="card">
+              <h3 id="admin-feature-form-title" style="margin-bottom: 16px;">Add New Feature Card</h3>
+              <form id="admin-feature-form">
+                <input type="hidden" id="admin-feature-edit-id" value="">
+                <div class="form-group">
+                  <label for="admin-feature-name">Feature Title</label>
+                  <input type="text" id="admin-feature-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-feature-icon">FontAwesome Icon Class</label>
+                  <input type="text" id="admin-feature-icon" class="form-control" placeholder="e.g. fa-graduation-cap" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-feature-desc">Description</label>
+                  <textarea id="admin-feature-desc" class="form-control" style="min-height: 80px;" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="admin-feature-image">Card Background Image (Optional)</label>
+                  <input type="file" id="admin-feature-image" class="form-control" accept="image/*">
+                  <img id="admin-feature-image-preview" src="" style="max-width: 100%; max-height: 120px; display: none; margin-top: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                  <div style="display: flex; gap: 8px; margin-top: 8px; align-items: center;">
+                    <button type="button" class="btn btn-secondary btn-sm" id="admin-feature-image-remove" style="display: none;">Remove Image</button>
+                    <input type="checkbox" id="admin-feature-image-hide" style="width: 16px; height: 16px; cursor: pointer; display: none;">
+                    <label for="admin-feature-image-hide" id="admin-feature-image-hide-label" style="margin: 0; cursor: pointer; font-size: 13px; color: var(--text-muted); display: none;">Hide Image on Frontend</label>
+                  </div>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 8px; margin-top: 12px; margin-bottom: 16px;">
+                  <input type="checkbox" id="admin-feature-visible" checked style="width: 16px; height: 16px; cursor: pointer;">
+                  <label for="admin-feature-visible" style="margin: 0; cursor: pointer; font-weight: 500;">Visible to Users</label>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button type="submit" class="btn btn-primary" style="flex: 1;" id="admin-feature-save-btn">Save Feature</button>
+                  <button type="button" class="btn btn-secondary" style="display: none;" id="admin-feature-cancel-btn">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Active Features List Card -->
+            <div class="card">
+              <h3 style="margin-bottom: 16px;">Existing Features</h3>
+              <div id="admin-features-list" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Dynamic features loaded from Firestore -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: MANAGE TIMELINE -->
+        <div class="admin-tab-content" id="admin-tab-timeline-config" style="display: none;">
+          <div class="portal-header" style="display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+            <h2>Challenge Timeline Manager</h2>
+            <button class="btn btn-outline btn-sm" onclick="adminResetTimelineToDefault()" style="color: var(--warning); border-color: var(--warning); padding: 6px 12px; font-weight: 600;"><i class="fa-solid fa-arrows-rotate"></i> Reset Timeline to Default</button>
+          </div>
+          
+          <div class="grid-2" style="align-items: start;">
+            <!-- Save/Edit Event Card -->
+            <div class="card">
+              <h3 id="admin-timeline-form-title" style="margin-bottom: 16px;">Add Timeline Milestone</h3>
+              <form id="admin-timeline-form">
+                <input type="hidden" id="admin-timeline-edit-id" value="">
+                <div class="form-row">
+                  <div class="form-group" style="flex: 2;">
+                    <label for="admin-timeline-title">Event Title</label>
+                    <input type="text" id="admin-timeline-title" class="form-control" placeholder="e.g. Application Deadline" required>
+                  </div>
+                  <div class="form-group" style="flex: 1;">
+                    <label for="admin-timeline-step">Step Number</label>
+                    <input type="number" id="admin-timeline-step" class="form-control" placeholder="e.g. 1" min="1" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="admin-timeline-date">Date / Duration String</label>
+                  <input type="text" id="admin-timeline-date" class="form-control" placeholder="e.g. July 15 @ 23:59 EST" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-timeline-desc">Description</label>
+                  <textarea id="admin-timeline-desc" class="form-control" style="min-height: 80px;" placeholder="Outline deliverables, resources or milestones for this phase..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="admin-timeline-status">Milestone Progress Status</label>
+                  <select id="admin-timeline-status" class="form-control" required>
+                    <option value="upcoming">Upcoming (Not Active)</option>
+                    <option value="active">Active (Current Stage)</option>
+                    <option value="completed">Completed (Passed Stage)</option>
+                  </select>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 16px;">
+                  <button type="submit" class="btn btn-primary" style="flex: 1;" id="admin-timeline-save-btn">Save Milestone</button>
+                  <button type="button" class="btn btn-secondary" style="display: none;" id="admin-timeline-cancel-btn">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Existing Milestones Card -->
+            <div class="card">
+              <h3 style="margin-bottom: 16px;">Timeline Milestones</h3>
+              <div id="admin-timeline-list" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Dynamic milestones loaded from Firestore -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Preview Roadmap -->
+          <div class="card" style="margin-top: 24px;">
+            <h3 style="margin-bottom: 8px; color: var(--primary);"><i class="fa-solid fa-eye"></i> Live Roadmap Preview</h3>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 20px;">This shows exactly how the roadmap looks on the applicant landing page based on your settings above.</p>
+            <div class="timeline-container" id="admin-timeline-preview-container" style="background: var(--bg-card); padding: 40px 20px; border-radius: var(--radius-md);">
+              <div class="timeline-line"></div>
+              <!-- Preview rendered dynamically from administrative status state -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: MANAGE REWARDS -->
+        <div class="admin-tab-content" id="admin-tab-rewards-config" style="display: none;">
+          <div class="portal-header">
+            <div>
+              <h2>Manage Challenge Rewards</h2>
+              <p style="color: var(--text-light); font-size: 14px; margin-top: 4px;">Configure the technical support, mentorship packages, and AWS credits displayed on the landing page.</p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button id="toggle-prizes-section-btn" class="btn btn-outline" style="background: white;">
+                <i class="fa-solid fa-eye"></i> Hide Rewards Section
+              </button>
+              <button class="btn btn-secondary btn-sm" id="admin-rewards-reset-btn"><i class="fa-solid fa-rotate-left"></i> Reset to KNUST Defaults</button>
+            </div>
+          </div>
+          
+          <div class="grid-2" style="align-items: start;">
+            <!-- Save/Edit Reward Card -->
+            <div class="card">
+              <h3 id="admin-rewards-form-title" style="margin-bottom: 16px;">Add Reward Package</h3>
+              <form id="admin-rewards-form">
+                <input type="hidden" id="admin-rewards-edit-id" value="">
+                <div class="form-group">
+                  <label for="admin-rewards-rank">Rank / Heading</label>
+                  <input type="text" id="admin-rewards-rank" class="form-control" placeholder="e.g. 1st Place Grand Winner" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-rewards-amount">Value / Amount (GH₵)</label>
+                  <input type="text" id="admin-rewards-amount" class="form-control" placeholder="e.g. GH₵ 100,000" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-rewards-desc">Detailed Description</label>
+                  <textarea id="admin-rewards-desc" class="form-control" style="min-height: 100px;" placeholder="Outline the mentorship, cloud credits, office space, and engineering support included..." required></textarea>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 8px; margin-top: 16px; margin-bottom: 16px;">
+                  <input type="checkbox" id="admin-rewards-popular" style="width: 18px; height: 18px; cursor: pointer;">
+                  <label for="admin-rewards-popular" style="font-weight: 500; cursor: pointer;">Feature Card (Render with highlight banner)</label>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 16px;">
+                  <button type="submit" class="btn btn-primary" style="flex: 1;" id="admin-rewards-save-btn">Save Reward Package</button>
+                  <button type="button" class="btn btn-secondary" style="display: none;" id="admin-rewards-cancel-btn">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Existing Rewards List Card -->
+            <div class="card">
+              <h3 style="margin-bottom: 16px;">Configured Reward Cards</h3>
+              <div id="admin-rewards-list" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Dynamic rewards list with Edit / Delete actions -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Preview Rewards -->
+          <div class="card" style="margin-top: 24px;">
+            <h3 style="margin-bottom: 8px; color: var(--primary);"><i class="fa-solid fa-eye"></i> Live Rewards Preview</h3>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 20px;">This shows exactly how the Rewards section looks on the landing page based on your settings above.</p>
+            <div class="prizes-section" style="padding: 40px 20px; border-radius: var(--radius-md);">
+              <div class="grid-3" id="admin-rewards-preview-container">
+                <!-- Preview cards rendered dynamically -->
+              </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- ADMIN TAB: MANAGE LEGAL -->
+        <div class="admin-tab-content" id="admin-tab-legal-config" style="display: none;">
+          <div class="portal-header">
+            <div>
+              <h2>Manage Legal Documents</h2>
+              <p style="color: var(--text-light); font-size: 14px; margin-top: 4px;">Configure the Terms &amp; Rules, Privacy Policies, and Contact Support content shown on the platform.</p>
+            </div>
+          </div>
+          
+          <div class="grid-2" style="align-items: start;">
+            <!-- Save/Edit Legal Card -->
+            <div class="card">
+              <h3 id="admin-legal-form-title" style="margin-bottom: 16px;"><i class="fa-solid fa-file-pen"></i> Add Legal Document</h3>
+              <form id="admin-legal-form">
+                <input type="hidden" id="admin-legal-edit-id" value="">
+                <div class="form-group">
+                  <label for="admin-legal-title">Document Title</label>
+                  <input type="text" id="admin-legal-title" class="form-control" placeholder="e.g. Terms &amp; Rules" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-legal-content">Document Content</label>
+                  <textarea id="admin-legal-content" class="form-control" style="min-height: 220px;" placeholder="Write terms, conditions, privacy descriptions, or support instructions here...&#10;&#10;Tip: Use numbered lists like:&#10;1. First rule&#10;2. Second rule" required></textarea>
+                  <span style="font-size: 11px; color: var(--text-light); margin-top: 4px; display: block;"><i class="fa-solid fa-circle-info"></i> Content supports line breaks for numbered lists.</span>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 16px;">
+                  <button type="submit" class="btn btn-primary" style="flex: 1;" id="admin-legal-save-btn"><i class="fa-solid fa-floppy-disk"></i> Save Legal Document</button>
+                  <button type="button" class="btn btn-secondary" style="display: none;" id="admin-legal-cancel-btn"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Existing Legal List Card -->
+            <div class="card">
+              <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-rectangle-list"></i> Configured Legal Documents</h3>
+              <div id="admin-legal-list" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Dynamic legal list with Edit / Delete actions -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Preview -->
+          <div class="card" style="margin-top: 24px;">
+            <h3 style="margin-bottom: 8px; color: var(--primary);"><i class="fa-solid fa-eye"></i> Live Public Preview</h3>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 20px;">This shows how the legal documents appear on the public landing page right now.</p>
+            <div id="admin-legal-preview-container" style="display: flex; flex-direction: column; gap: 16px;">
+              <!-- Preview rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: MANAGE RESOURCES -->
+        <div class="admin-tab-content" id="admin-tab-resources-config" style="display: none;">
+          <div class="portal-header">
+            <div>
+              <h2>Manage Resource Center</h2>
+              <p style="color: var(--text-light); font-size: 14px; margin-top: 4px;">Upload templates, sheets, presentations, and guides for competitors to download from the Resource Center.</p>
+            </div>
+          </div>
+          
+          <div class="grid-2" style="align-items: start; gap: 24px;">
+            <!-- Save/Upload Resource Card -->
+            <div class="card">
+              <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-cloud-arrow-up"></i> Upload New Resource</h3>
+              <form id="admin-resource-form">
+                <input type="hidden" id="admin-resource-edit-id" value="">
+                <div class="form-group">
+                  <label for="admin-resource-title">Resource Title</label>
+                  <input type="text" id="admin-resource-title" class="form-control" placeholder="e.g. HatchPoint Official Rules & Guidelines" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-resource-desc">Description</label>
+                  <textarea id="admin-resource-desc" class="form-control" style="min-height: 80px;" placeholder="Describe what this template/document is for..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="admin-resource-file">Upload File <span style="font-weight: 400; color: var(--text-light);">(DOCX, PPTX, PDF, ZIP, XLSX, PNG, JPG; Max 4MB)</span></label>
+                  <input type="file" id="admin-resource-file" class="form-control" accept=".docx,.pptx,.pdf,.zip,.xlsx,.xls,.png,.jpg">
+                  <span id="admin-resource-current-file" style="font-size: 11px; color: var(--success); display: none; margin-top: 4px;"></span>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 16px;">
+                  <button type="submit" class="btn btn-primary" style="flex: 1;" id="admin-resource-save-btn"><i class="fa-solid fa-upload"></i> Upload & Publish</button>
+                  <button type="button" class="btn btn-secondary" style="display: none;" id="admin-resource-cancel-btn"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Existing Resources List Card -->
+            <div class="card">
+              <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-folder-open"></i> Published Resources</h3>
+              <div id="admin-resources-list" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Dynamic resource list with delete action -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Preview -->
+          <div class="card" style="margin-top: 24px;">
+            <h3 style="margin-bottom: 8px; color: var(--primary);"><i class="fa-solid fa-eye"></i> Live Public Preview</h3>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 20px;">This shows how the resources appear in the public Resource Center section.</p>
+            <div class="resource-layout-grid" style="width: 100%;">
+              <div class="resource-grid" id="admin-resources-preview-container" style="width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <!-- Preview cards rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: EVENT TICKETING -->
+        <div class="admin-tab-content" id="admin-tab-tickets-config" style="display: none;">
+          <div class="portal-header">
+            <div>
+              <h2>Event Ticketing Configurator</h2>
+              <p style="color: var(--text-light); font-size: 14px; margin-top: 4px;">Toggle attendance booking, set ticketing limits, and manage registered attendees for the HatchPoint Grand Finale.</p>
+            </div>
+          </div>
+          
+          <div class="grid-2" style="align-items: start; gap: 24px; grid-template-columns: 1fr 2fr;">
+            <!-- Ticket Configuration Card -->
+            <div class="card" style="display: flex; flex-direction: column; gap: 16px;">
+              <h3><i class="fa-solid fa-gears"></i> Ticketing Settings</h3>
+              <form id="admin-ticketing-settings-form" style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-app); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                  <label for="admin-tickets-toggle" style="font-weight: 600; font-size: 13px; color: var(--text-main); cursor: pointer; margin: 0;"><i class="fa-solid fa-power-off" style="color: var(--primary);"></i> Enable Ticketing</label>
+                  <input type="checkbox" id="admin-tickets-toggle" style="width: 20px; height: 20px; cursor: pointer;">
+                </div>
+                <div class="form-group">
+                  <label for="admin-tickets-event-title">Event Title</label>
+                  <input type="text" id="admin-tickets-event-title" class="form-control" placeholder="e.g. HatchPoint Grand Finale Pitch Day" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-tickets-event-date">Event Date &amp; Time</label>
+                  <input type="text" id="admin-tickets-event-date" class="form-control" placeholder="e.g. August 15, 2026 @ 09:00 AM" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-tickets-event-venue">Event Venue</label>
+                  <input type="text" id="admin-tickets-event-venue" class="form-control" placeholder="e.g. KNUST Great Hall" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-tickets-limit">Ticket Quota Limit</label>
+                  <input type="number" id="admin-tickets-limit" class="form-control" placeholder="e.g. 500" min="10" required>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-app); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                  <label for="admin-tickets-show-seats" style="font-weight: 600; font-size: 13px; color: var(--text-main); cursor: pointer; margin: 0;"><i class="fa-solid fa-chair" style="color: var(--primary);"></i> Show Seat Numbers</label>
+                  <input type="checkbox" id="admin-tickets-show-seats" style="width: 20px; height: 20px; cursor: pointer;">
+                </div>
+                <div class="form-group">
+                  <label for="admin-tickets-seat-prefix">Seat Prefix</label>
+                  <input type="text" id="admin-tickets-seat-prefix" class="form-control" placeholder="e.g. GA-" value="GA-">
+                </div>
+                <div class="form-group">
+                  <label for="admin-tickets-seat-start">Starting Seat Number</label>
+                  <input type="number" id="admin-tickets-seat-start" class="form-control" placeholder="e.g. 1" min="1" value="1">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 8px;"><i class="fa-solid fa-floppy-disk"></i> Save Settings</button>
+              </form>
+
+              <hr style="border: 0; border-top: 1px dashed var(--border); margin: 8px 0;">
+
+              <!-- Add Ticket Manually Form -->
+              <h3><i class="fa-solid fa-user-plus"></i> Manual Registration</h3>
+              <form id="admin-ticket-add-form" style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="form-group">
+                  <label for="admin-ticket-add-name">Attendee Full Name</label>
+                  <input type="text" id="admin-ticket-add-name" class="form-control" placeholder="e.g. Kelvin Boateng" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-ticket-add-email">Attendee Email Address</label>
+                  <input type="email" id="admin-ticket-add-email" class="form-control" placeholder="e.g. kelvin@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="admin-ticket-add-seat">Custom Seat Number (Optional)</label>
+                  <input type="text" id="admin-ticket-add-seat" class="form-control" placeholder="e.g. VIP-01 (leave blank to auto-assign)">
+                </div>
+                <button type="submit" class="btn btn-secondary btn-block"><i class="fa-solid fa-ticket"></i> Issue Ticket</button>
+              </form>
+            </div>
+
+            <!-- Attendees & Booking Logs Card -->
+            <div class="card" style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3><i class="fa-solid fa-clipboard-list"></i> Booked Attendees</h3>
+                <span id="admin-tickets-count-badge" class="badge badge-info">0 / 0 Booked</span>
+              </div>
+              
+              <div class="table-container" style="max-height: 520px; overflow-y: auto;">
+                <table class="table" style="width: 100%;">
+                  <thead>
+                    <tr>
+                      <th>Ticket ID</th>
+                      <th>Guest Name</th>
+                      <th>Email Address</th>
+                      <th>Seat</th>
+                      <th>Date Booked</th>
+                      <th style="width: 80px; text-align: center;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-tickets-table-body">
+                    <!-- Dynamic bookings rendered here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Auditorium Seating Visualizer -->
+          <div class="card" style="margin-top: 24px; display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="display: flex; align-items: center; gap: 8px; margin: 0;"><i class="fa-solid fa-chair" style="color: var(--primary);"></i> KNUST Great Hall Seating Visualizer</h3>
+                <p style="color: var(--text-light); font-size: 13px; margin: 4px 0 0 0;">Interactive map of booked and available auditorium seats. Click an available seat to pre-assign it.</p>
+              </div>
+              <div style="display: flex; gap: 12px; font-size: 12px; font-weight: 600; flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.5); border-radius: 3px; display: inline-block;"></span> Available</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 3px; display: inline-block;"></span> Booked</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="position: relative; width: 12px; height: 12px; background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.5); border-radius: 3px; display: inline-block;"></span> VIP Row (A-B) <span style="display: inline-block; width: 4px; height: 4px; background: #f59e0b; border-radius: 50%; margin-left: -10px; margin-top: -6px; z-index: 10;"></span></span>
+              </div>
+            </div>
+
+            <!-- Stage Display -->
+            <div style="width: 100%; text-align: center; background: linear-gradient(180deg, var(--border) 0%, transparent 100%); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-family: var(--font-heading); font-weight: 700; font-size: 13px; letter-spacing: 3px; color: var(--text-light); text-transform: uppercase; margin-top: 8px;">
+              ★ STAGE ★
+            </div>
+
+            <!-- Seating Map Grid -->
+            <div id="admin-auditorium-map" style="padding: 24px; overflow-x: auto; background: var(--bg-app); border: 1px solid var(--border); border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 250px; position: relative;">
+              <!-- Dynamic seating row loops in Javascript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: SPONSORS -->
+        <div class="admin-tab-content" id="admin-tab-sponsors-config" style="display: none;">
+          <div class="portal-header">
+            <div>
+              <h1 class="portal-title">Manage Sponsors</h1>
+              <p class="portal-subtitle">Upload and manage sponsor logos for the public homepage.</p>
+            </div>
+            <div>
+              <button id="toggle-sponsors-section-btn" class="btn btn-outline" style="background: white;">
+                <i class="fa-solid fa-eye"></i> Hide Sponsors Section
+              </button>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom: 24px;">
+            <h3>Add New Sponsor</h3>
+            <form id="admin-sponsor-form" style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
+              <div>
+                <label>Sponsor Name</label>
+                <input type="text" id="admin-sponsor-name" class="form-control" placeholder="e.g. Acme Corp" required>
+              </div>
+              <div>
+                <label>Sponsor Website URL (Optional)</label>
+                <input type="url" id="admin-sponsor-url" class="form-control" placeholder="https://www.example.com">
+              </div>
+              <div>
+                <label>Sponsor Logo (Image)</label>
+                <input type="file" id="admin-sponsor-logo" class="form-control" accept="image/*" required>
+                <div id="admin-sponsor-logo-preview" style="display: none; margin-top: 10px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: var(--radius-sm); padding: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.12); box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);">
+                  <span style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 6px; font-weight: 500;">Logo Contrast Preview</span>
+                  <img id="admin-sponsor-logo-preview-img" style="max-height: 80px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" id="admin-sponsor-submit-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Sponsor</button>
+            </form>
+          </div>
+          <div class="card">
+            <h3>Active Sponsors</h3>
+            <div id="admin-sponsors-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; margin-top: 16px;">
+              <div class="empty-state" style="grid-column: 1 / -1;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; color: var(--primary);"></i>
+                <p>Loading sponsors...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: BULK EMAIL -->
+        <div class="admin-tab-content" id="admin-tab-bulk-email" style="display: none;">
+          <div class="portal-header">
+            <div>
+              <h1 class="portal-title">Bulk Email Campaigns</h1>
+              <p class="portal-subtitle">Extract recipient emails from registered team submissions, compose customized updates with AI assistance, and dispatch bulk emails.</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span id="bulk-email-recipient-count" class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--primary); font-size: 12px; padding: 4px 12px; font-weight: 600; border-radius: 20px;">
+                0 Recipients Selected
+              </span>
+            </div>
+          </div>
+
+          <!-- BULK EMAIL SENDER & SUBMISSION EXTRACTOR -->
+          <div class="card" style="margin-bottom: 24px; border-top: 4px solid var(--primary);">
+            <div style="border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;">
+              <h3 style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 16px;">
+                <i class="fa-solid fa-paper-plane" style="color: var(--primary); font-size: 18px;"></i>
+                Bulk Email Sender (Team Submissions Extractor)
+              </h3>
+              <p style="margin: 4px 0 0; font-size: 13px; color: var(--text-light);">
+                Extract emails from registered team submissions and dispatch customized bulk emails via a custom API endpoint.
+              </p>
+            </div>
+
+            <!-- STEP 1: EXTRACTION FILTERS -->
+            <div style="background: var(--bg-body, #f8fafc); padding: 16px; border-radius: var(--radius-md, 10px); border: 1px solid var(--border, #e2e8f0); margin-bottom: 16px;">
+              <h4 style="margin: 0 0 12px; font-size: 14px; color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-filter" style="color: var(--primary);"></i> 1. Extraction Filters & Target Audience
+              </h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                <div>
+                  <label for="bulk-email-target-type" style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">Target Email Group</label>
+                  <select id="bulk-email-target-type" class="form-control" style="font-size: 13px; padding: 8px 10px;">
+                    <option value="leads">Team Leads Only</option>
+                    <option value="all">All Team Members (Leads + Members)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="bulk-email-track-filter" style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">Track Filter</label>
+                  <select id="bulk-email-track-filter" class="form-control" style="font-size: 13px; padding: 8px 10px;">
+                    <option value="all">All Tracks</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="bulk-email-status-filter" style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">Status Filter</label>
+                  <select id="bulk-email-status-filter" class="form-control" style="font-size: 13px; padding: 8px 10px;">
+                    <option value="all">All Submission Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
+                </div>
+                <div style="display: flex; align-items: flex-end;">
+                  <button type="button" id="bulk-email-extract-btn" class="btn btn-outline" style="width: 100%; font-size: 13px; padding: 8px 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                    <i class="fa-solid fa-arrows-rotate"></i> Extract Emails
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- RECIPIENT PREVIEW & MANUAL EDIT -->
+            <div style="margin-bottom: 16px;">
+              <!-- ATTACH SINGLE / CUSTOM RECIPIENT EMAIL INPUT BOX -->
+              <div style="background: var(--bg-body, #f8fafc); padding: 12px 14px; border-radius: var(--radius-md, 8px); border: 1px solid var(--border, #e2e8f0); margin-bottom: 12px;">
+                <label for="bulk-email-attach-input" style="font-size: 13px; font-weight: 600; color: var(--text-main); display: block; margin-bottom: 6px;">
+                  <i class="fa-solid fa-paperclip" style="color: var(--primary);"></i> Attach Recipient Email
+                </label>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 220px; position: relative;">
+                    <i class="fa-solid fa-envelope" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 13px;"></i>
+                    <input type="email" id="bulk-email-attach-input" class="form-control" placeholder="Enter recipient email address (e.g. name@example.com)" style="padding-left: 36px; font-size: 13px; height: 38px;">
+                  </div>
+                  <button type="button" id="bulk-email-attach-btn" class="btn btn-primary btn-sm" style="height: 38px; padding: 0 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+                    <i class="fa-solid fa-plus"></i> Attach Email
+                  </button>
+                </div>
+                <span style="font-size: 11px; color: var(--text-light); margin-top: 4px; display: block;">Type a recipient email and click "Attach Email" (or press Enter) to append it to the recipient list below.</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label for="bulk-email-recipients" style="font-size: 13px; font-weight: 600; color: var(--text-main);">
+                  Extracted Recipient Email List <span style="font-size: 11px; color: var(--text-light); font-weight: normal;">(Comma or newline separated)</span>
+                </label>
+                <button type="button" id="bulk-email-copy-list-btn" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 2px 8px;">
+                  <i class="fa-solid fa-copy"></i> Copy Email List
+                </button>
+              </div>
+              <textarea id="bulk-email-recipients" class="form-control" rows="3" placeholder="Click 'Extract Emails' above, use the attach email input box, or type emails separated by commas..." style="font-size: 12px; font-family: monospace; resize: vertical;"></textarea>
+            </div>
+
+            <!-- STEP 2: API ENDPOINT & HEADERS CONFIG -->
+            <div style="background: var(--bg-body, #f8fafc); padding: 16px; border-radius: var(--radius-md, 10px); border: 1px solid var(--border, #e2e8f0); margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                <h4 style="margin: 0; font-size: 14px; color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-server" style="color: var(--primary);"></i> 2. Custom Email API Endpoint Settings
+                </h4>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <button type="button" id="bulk-email-use-render-btn" class="btn btn-sm btn-primary" style="font-size: 12px; background: #6366f1; border-color: #6366f1; color: white; display: inline-flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-bolt"></i> Use Render Cloud API
+                  </button>
+                  <button type="button" id="bulk-email-save-api-btn" class="btn btn-sm btn-outline" style="font-size: 12px;">
+                    <i class="fa-solid fa-floppy-disk"></i> Save API Config
+                  </button>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+                <div>
+                  <label for="bulk-email-api-url" style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">
+                    API Endpoint URL <span style="color: var(--danger);">*</span>
+                  </label>
+                  <input type="url" id="bulk-email-api-url" class="form-control" placeholder="https://nodejs-backend-4lvt.onrender.com/api/send-email" style="font-size: 13px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px; flex-wrap: wrap; gap: 4px;">
+                    <span style="font-size: 11px; color: var(--text-light);">HTTP POST URL receiving JSON `{ to, subject, message, senderName }`</span>
+                    <button type="button" id="bulk-email-preset-render-link" style="background: none; border: none; padding: 0; font-size: 11px; color: var(--primary); text-decoration: underline; cursor: pointer; font-weight: 600;">
+                      ⚡ Auto-fill Render URL
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label for="bulk-email-api-headers" style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">
+                    Custom Headers / API Key <span style="font-weight: normal; color: var(--text-light);">(Optional JSON or Bearer Token)</span>
+                  </label>
+                  <input type="text" id="bulk-email-api-headers" class="form-control" placeholder='Authorization: Bearer key_xxx  OR  {"x-api-key": "xxx"}' style="font-size: 13px;">
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: EMAIL COMPOSER -->
+            <form id="admin-bulk-email-form" style="display: flex; flex-direction: column; gap: 14px;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                  <h4 style="margin: 0; font-size: 14px; color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-pen-to-square" style="color: var(--primary);"></i> 3. Compose Email Content
+                  </h4>
+                  <button type="button" id="bulk-email-ai-modal-btn" class="btn btn-sm" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #d946ef 100%); color: white; border: none; font-weight: 600; font-size: 12px; padding: 6px 14px; border-radius: 20px; box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35); display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: transform 0.2s;">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> ✨ AI Craft Email
+                  </button>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 12px;">
+                  <div>
+                    <label for="bulk-email-sender-name" style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">Sender Display Name</label>
+                    <input type="text" id="bulk-email-sender-name" class="form-control" value="HatchPoint Team" placeholder="HatchPoint Team" style="font-size: 13px;">
+                  </div>
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                      <label for="bulk-email-subject" style="font-size: 12px; font-weight: 600; color: var(--text-main);">
+                        Email Subject <span style="color: var(--danger);">*</span>
+                      </label>
+                      <button type="button" id="bulk-email-ai-subject-btn" style="background: none; border: none; padding: 0; font-size: 11px; color: #7c3aed; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-lightbulb"></i> AI Subject Ideas
+                      </button>
+                    </div>
+                    <input type="text" id="bulk-email-subject" class="form-control" placeholder="Important Update regarding HatchPoint Hackathon..." required style="font-size: 13px;">
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
+                    <label for="bulk-email-body" style="font-size: 12px; font-weight: 600; color: var(--text-main);">
+                      Email Body / Message <span style="color: var(--danger);">*</span>
+                    </label>
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                      <div style="display: flex; gap: 6px;">
+                        <button type="button" id="bulk-email-ai-polish-btn" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 2px 8px; border-color: #7c3aed; color: #7c3aed; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
+                          <i class="fa-solid fa-sparkles"></i> AI Polish
+                        </button>
+                        <button type="button" id="bulk-email-ai-cta-btn" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 2px 8px; border-color: #4f46e5; color: #4f46e5; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
+                          <i class="fa-solid fa-bullhorn"></i> Add CTA
+                        </button>
+                      </div>
+                      <span style="font-size: 11px; color: var(--text-light);">Tags: {{recipient_email}}, {{team_name}}</span>
+                    </div>
+                  </div>
+                  <textarea id="bulk-email-body" class="form-control" rows="6" placeholder="Dear Team Leader,&#10;&#10;We are pleased to inform you about..." required style="font-size: 13px; resize: vertical; font-family: inherit;"></textarea>
+                </div>
+              </div>
+
+              <!-- PROGRESS BAR & STATUS MONITOR -->
+              <div id="bulk-email-progress-container" style="display: none; background: var(--bg-body); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px; font-weight: 600;">
+                  <span id="bulk-email-progress-status">Dispatching emails...</span>
+                  <span id="bulk-email-progress-percent">0%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 8px;">
+                  <div id="bulk-email-progress-bar" style="width: 0%; height: 100%; background: var(--primary); transition: width 0.3s;"></div>
+                </div>
+                <div id="bulk-email-log" style="font-size: 11px; max-height: 100px; overflow-y: auto; color: var(--text-light); font-family: monospace; background: white; padding: 8px; border-radius: 4px; border: 1px solid var(--border);"></div>
+              </div>
+
+              <!-- ACTIONS -->
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 4px;">
+                <div style="font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 6px;">
+                  <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i> Custom API receives POST requests for each batch/recipient.
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="bulk-email-test-recipient" style="font-size: 11px; font-weight: 600; color: var(--text-main); margin: 0; white-space: nowrap;">Test To:</label>
+                    <input type="email" id="bulk-email-test-recipient" class="form-control" placeholder="test@example.com" style="font-size: 12px; padding: 6px 10px; height: 36px; width: 190px;" title="Specific recipient email address for test dispatches">
+                  </div>
+                  <button type="button" id="bulk-email-send-test-btn" class="btn btn-outline" style="font-size: 13px; padding: 8px 16px; font-weight: 600; height: 36px;">
+                    <i class="fa-solid fa-vial"></i> Send Test Request
+                  </button>
+                  <button type="submit" id="bulk-email-send-btn" class="btn btn-primary" style="font-size: 13px; padding: 8px 22px; font-weight: 600; height: 36px; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-paper-plane"></i> Send Bulk Email
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB: SUPPORT CHAT -->
+        <div class="admin-tab-content" id="admin-tab-support-chat" style="display: none;">
+          <div class="portal-header">
+            <div>
+              <h1 class="portal-title">Support & Feedback</h1>
+              <p class="portal-subtitle">Manage user inquiries, configure floating WhatsApp & TikTok promotional links, and respond to support messages.</p>
+            </div>
+          </div>
+          
+          <!-- WHATSAPP FLOATING WIDGET CONFIGURATION -->
+          <div class="card" style="margin-bottom: 24px; border-top: 4px solid #25D366;">
+            <div style="border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 16px;">
+                  <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 20px;"></i>
+                  Floating WhatsApp Group & Community Widget
+                </h3>
+                <p style="margin: 4px 0 0; font-size: 13px; color: var(--text-light);">
+                  Configure the floating WhatsApp button displayed on the public site and embed your community group link.
+                </p>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span id="admin-wa-status-badge" class="badge" style="background: rgba(37, 211, 102, 0.15); color: #128C7E; font-size: 12px; padding: 4px 10px; font-weight: 600; border-radius: 20px; display: inline-flex; align-items: center; gap: 6px;">
+                  <i class="fa-solid fa-circle" style="font-size: 8px; color: #25D366;"></i> Active
+                </span>
+              </div>
+            </div>
+
+            <form id="admin-whatsapp-config-form" style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <!-- Toggle Widget Enabled -->
+                <div style="background: var(--bg-body, #f8fafc); padding: 14px 16px; border-radius: var(--radius-md, 10px); border: 1px solid var(--border, #e2e8f0); display: flex; align-items: center; justify-content: space-between;">
+                  <div>
+                    <label for="admin-wa-enabled" style="font-size: 14px; font-weight: 600; cursor: pointer; color: var(--text-main);">Enable Floating WhatsApp Button</label>
+                    <p style="margin: 2px 0 0; font-size: 12px; color: var(--text-light);">Show floating logo widget on public website</p>
+                  </div>
+                  <label class="switch" style="position: relative; display: inline-block; width: 44px; height: 24px;">
+                    <input type="checkbox" id="admin-wa-enabled" checked style="opacity: 0; width: 0; height: 0;">
+                    <span class="slider" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 24px;"></span>
+                  </label>
+                </div>
+
+                <!-- Display Mode Selection -->
+                <div style="background: var(--bg-body, #f8fafc); padding: 14px 16px; border-radius: var(--radius-md, 10px); border: 1px solid var(--border, #e2e8f0);">
+                  <label for="admin-wa-mode" style="font-size: 14px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">Click Behavior Mode</label>
+                  <select id="admin-wa-mode" class="form-control" style="font-size: 13px; padding: 8px 12px; border-radius: 6px;">
+                    <option value="popup">Interactive Popup Menu (Join Group + Chat Support)</option>
+                    <option value="direct">Direct Redirect to WhatsApp Group Link</option>
+                  </select>
+                </div>
+
+                <!-- Screen Position / Mirror Alignment -->
+                <div style="background: var(--bg-body, #f8fafc); padding: 14px 16px; border-radius: var(--radius-md, 10px); border: 1px solid var(--border, #e2e8f0);">
+                  <label for="admin-wa-position" style="font-size: 14px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">Widget Alignment & Mirroring</label>
+                  <select id="admin-wa-position" class="form-control" style="font-size: 13px; padding: 8px 12px; border-radius: 6px;">
+                    <option value="auto">Auto-Mirror to Left Side (When Ticketing is ON)</option>
+                    <option value="left">Always Left Side (Desktop & Mobile)</option>
+                    <option value="right">Always Right Side</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <!-- WhatsApp Group Link -->
+                <div>
+                  <label for="admin-wa-group-link" style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; color: var(--text-main);">
+                    WhatsApp Group Link <span style="color: var(--danger);">*</span>
+                  </label>
+                  <div style="position: relative;">
+                    <i class="fa-solid fa-link" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 13px;"></i>
+                    <input type="url" id="admin-wa-group-link" class="form-control" placeholder="https://chat.whatsapp.com/YourGroupCode" required style="padding-left: 36px; font-size: 13px;">
+                  </div>
+                  <span style="font-size: 11px; color: var(--text-light); margin-top: 4px; display: block;">Paste your official WhatsApp group invite link here.</span>
+                </div>
+
+                <!-- Tooltip / Button Label -->
+                <div>
+                  <label for="admin-wa-label" style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; color: var(--text-main);">
+                    Floating Logo Hover Label
+                  </label>
+                  <input type="text" id="admin-wa-label" class="form-control" placeholder="Join our WhatsApp Community" style="font-size: 13px;">
+                  <span style="font-size: 11px; color: var(--text-light); margin-top: 4px; display: block;">Tooltip shown when users hover over the floating WhatsApp logo.</span>
+                </div>
+              </div>
+
+              <!-- Community Welcome Description -->
+              <div>
+                <label for="admin-wa-welcome-text" style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; color: var(--text-main);">
+                  Menu Popup Header & Description
+                </label>
+                <textarea id="admin-wa-welcome-text" class="form-control" rows="2" placeholder="Join our official HatchPoint WhatsApp group for live updates, announcements, and direct community support!" style="font-size: 13px; resize: vertical;"></textarea>
+              </div>
+
+              <!-- Action Bar & Preview -->
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-light);">
+                  <i class="fa-solid fa-shield-halved" style="color: #25D366;"></i> Updates sync live to all online visitors instantly.
+                </div>
+                <button type="submit" id="admin-save-wa-btn" class="btn btn-primary" style="background: #25D366; border-color: #25D366; color: white; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-weight: 600;">
+                  <i class="fa-solid fa-floppy-disk"></i> Save WhatsApp Config
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- TIKTOK FLOATING WIDGET CONFIGURATION -->
+          <div class="card" style="margin-bottom: 24px; border-top: 4px solid #fe2c55;">
+            <div style="border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 16px;">
+                  <i class="fa-brands fa-tiktok" style="color: #fe2c55; font-size: 20px;"></i>
+                  Floating TikTok Promotion & Community Widget
+                </h3>
+                <p style="margin: 4px 0 0; font-size: 13px; color: var(--text-light);">
+                  Configure the floating TikTok button displayed on the public site and link your official channel or promo video.
+                </p>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span id="admin-tiktok-status-badge" class="badge" style="background: rgba(254, 44, 85, 0.15); color: #fe2c55; font-size: 12px; padding: 4px 10px; font-weight: 600; border-radius: 20px; display: inline-flex; align-items: center; gap: 6px;">
+                  <i class="fa-solid fa-circle" style="font-size: 8px; color: #fe2c55;"></i> Active
+                </span>
+              </div>
+            </div>
+
+            <form id="admin-tiktok-config-form" style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <!-- Toggle Widget Enabled -->
+                <div style="background: var(--bg-body, #f8fafc); padding: 14px 16px; border-radius: var(--radius-md, 10px); border: 1px solid var(--border, #e2e8f0); display: flex; align-items: center; justify-content: space-between;">
+                  <div>
+                    <label for="admin-tiktok-enabled" style="font-size: 14px; font-weight: 600; cursor: pointer; color: var(--text-main);">Enable Floating TikTok Button</label>
+                    <p style="margin: 2px 0 0; font-size: 12px; color: var(--text-light);">Show floating TikTok logo widget on public website</p>
+                  </div>
+                  <label class="switch switch-tiktok" style="position: relative; display: inline-block; width: 44px; height: 24px;">
+                    <input type="checkbox" id="admin-tiktok-enabled" checked style="opacity: 0; width: 0; height: 0;">
+                    <span class="slider" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 24px;"></span>
+                  </label>
+                </div>
+
+                <!-- Display Mode Selection -->
+                <div style="background: var(--bg-body, #f8fafc); padding: 14px 16px; border-radius: var(--radius-md, 10px); border: 1px solid var(--border, #e2e8f0);">
+                  <label for="admin-tiktok-mode" style="font-size: 14px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">Click Behavior Mode</label>
+                  <select id="admin-tiktok-mode" class="form-control" style="font-size: 13px; padding: 8px 12px; border-radius: 6px;">
+                    <option value="popup">Interactive Popup Menu (Watch & Follow Card)</option>
+                    <option value="direct">Direct Redirect to TikTok Link</option>
+                  </select>
+                </div>
+
+                <!-- Screen Position / Mirror Alignment -->
+                <div style="background: var(--bg-body, #f8fafc); padding: 14px 16px; border-radius: var(--radius-md, 10px); border: 1px solid var(--border, #e2e8f0);">
+                  <label for="admin-tiktok-position" style="font-size: 14px; font-weight: 600; display: block; margin-bottom: 4px; color: var(--text-main);">Widget Alignment & Placement</label>
+                  <select id="admin-tiktok-position" class="form-control" style="font-size: 13px; padding: 8px 12px; border-radius: 6px;">
+                    <option value="auto">Auto-Stack on Right Side (Above WhatsApp)</option>
+                    <option value="left">Always Left Side (Desktop & Mobile)</option>
+                    <option value="right">Always Right Side</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <!-- TikTok Account Link -->
+                <div>
+                  <label for="admin-tiktok-link" style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; color: var(--text-main);">
+                    TikTok Account or Video Link <span style="color: var(--danger);">*</span>
+                  </label>
+                  <div style="position: relative;">
+                    <i class="fa-brands fa-tiktok" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 13px;"></i>
+                    <input type="url" id="admin-tiktok-link" class="form-control" placeholder="https://www.tiktok.com/@hatchpoint" required style="padding-left: 36px; font-size: 13px;">
+                  </div>
+                  <span style="font-size: 11px; color: var(--text-light); margin-top: 4px; display: block;">Paste your official TikTok channel or promotional link here.</span>
+                </div>
+
+                <!-- Tooltip / Button Label -->
+                <div>
+                  <label for="admin-tiktok-label" style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; color: var(--text-main);">
+                    Floating Logo Hover Tooltip
+                  </label>
+                  <input type="text" id="admin-tiktok-label" class="form-control" placeholder="Watch on TikTok" style="font-size: 13px;">
+                  <span style="font-size: 11px; color: var(--text-light); margin-top: 4px; display: block;">Tooltip shown when users hover over the floating TikTok logo.</span>
+                </div>
+              </div>
+
+              <!-- Community Welcome Description -->
+              <div>
+                <label for="admin-tiktok-welcome-text" style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; color: var(--text-main);">
+                  Menu Popup Header & Description
+                </label>
+                <textarea id="admin-tiktok-welcome-text" class="form-control" rows="2" placeholder="Follow our official TikTok for challenge highlights, student pitches, backstage moments, and announcements!" style="font-size: 13px; resize: vertical;"></textarea>
+              </div>
+
+              <!-- Action Bar & Preview -->
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-light);">
+                  <i class="fa-solid fa-shield-halved" style="color: #fe2c55;"></i> Updates sync live to all online visitors instantly.
+                </div>
+                <button type="submit" id="admin-save-tiktok-btn" class="btn btn-primary" style="background: #fe2c55; border-color: #fe2c55; color: white; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-weight: 600;">
+                  <i class="fa-solid fa-floppy-disk"></i> Save TikTok Config
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card">
+            <div style="border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px; margin-top: 0; display: flex; align-items: center; justify-content: space-between;">
+              <h3 style="margin: 0; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-inbox" style="color: var(--primary);"></i> Inbound Messages</h3>
+              <button id="admin-delete-all-chats-btn" class="btn btn-outline btn-sm" style="color: var(--danger); border-color: rgba(239, 68, 68, 0.2);"><i class="fa-solid fa-trash-can"></i> Delete All</button>
+            </div>
+            <div id="support-messages-container" style="display: flex; flex-direction: column; gap: 16px;">
+              <div class="empty-state">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; color: var(--primary);"></i>
+                <p>Loading messages...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- AI EMAIL WRITER MODAL -->
+  <div id="bulk-email-ai-modal" class="modal-overlay" style="display: none; position: fixed; inset: 0; background: rgba(15, 15, 16, 0.72); backdrop-filter: blur(4px); z-index: 9999; align-items: center; justify-content: center; padding: 16px;">
+    <div style="background: var(--color-paper-white, #ffffff); border-radius: 12px; max-width: 580px; width: 100%; border: 1px solid var(--color-ink-black, #000000); overflow: hidden;">
+      <div style="background: var(--color-obsidian, #0f0f10); padding: 18px 22px; color: white; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-ink-black, #000000);">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 4px; background: var(--color-pixel-lime, #e7f6cd); color: var(--color-forest-pixel, #195321); display: flex; align-items: center; justify-content: center; font-size: 16px;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <div>
+            <h3 style="margin: 0; font-family: var(--font-focal); font-size: 16px; font-weight: 800; color: white;">Kwabz AI Email Assistant</h3>
+            <p style="margin: 2px 0 0; font-family: var(--font-chivo-mono, monospace); font-size: 11px; color: var(--color-pixel-lime, #e7f6cd);">GEMINI AI // AUTOMATED EMAIL COMPOSER</p>
+          </div>
+        </div>
+        <button type="button" id="bulk-email-ai-close-btn" style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.25); color: white; width: 30px; height: 30px; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div style="padding: 20px; display: flex; flex-direction: column; gap: 14px; max-height: 75vh; overflow-y: auto;">
+        <div>
+          <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px; color: var(--text-main);">
+            What is the objective/topic of this email? <span style="color: var(--danger);">*</span>
+          </label>
+          <textarea id="ai-email-prompt-input" class="form-control" rows="3" placeholder="e.g. Announce hackathon submission deadline, outline required slide deck format, and invite team leads to Q&A session..." style="font-size: 13px; resize: vertical;"></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+          <div>
+            <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px; color: var(--text-main);">Tone & Style</label>
+            <select id="ai-email-tone-select" class="form-control" style="font-size: 13px;">
+              <option value="Professional & Executive">Professional & Executive (Official, Clear)</option>
+              <option value="Exciting & Promotional">Exciting & Promotional (Promos, Deals)</option>
+              <option value="Urgent & Reminder">Urgent & Reminder (Deadlines, Reminders)</option>
+              <option value="Warm & Encouraging">Warm & Encouraging (Welcome, Support)</option>
+              <option value="Friendly & Casual">Friendly & Casual (Conversational)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px; color: var(--text-main);">Key Highlights / Links (Optional)</label>
+            <input type="text" id="ai-email-keypoints-input" class="form-control" placeholder="e.g. Deadline: Aug 30, Portal: hatchpoint.app/submit" style="font-size: 13px;">
+          </div>
+        </div>
+
+        <!-- AI Output Preview Box -->
+        <div id="ai-email-preview-box" style="display: none; background: var(--color-fog-surface, #f4f4f5); border: 1px solid var(--color-ink-black, #000000); border-radius: 8px; padding: 14px; margin-top: 4px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-family: var(--font-chivo-mono, monospace); font-size: 11px; font-weight: 700; color: var(--color-electric-violet, #6120ee); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 4px;">
+              <i class="fa-solid fa-circle-check"></i> AI Generated Email Draft
+            </span>
+            <button type="button" id="ai-email-apply-btn" class="btn btn-sm btn-primary" style="font-size: 12px; display: inline-flex; align-items: center; gap: 4px;">
+              <i class="fa-solid fa-check"></i> Apply to Composer
+            </button>
+          </div>
+          <div style="font-size: 12px; font-weight: 700; color: var(--text-main); margin-bottom: 6px;" id="ai-preview-subject-text">Subject: ...</div>
+          <div style="font-size: 12px; color: var(--text-main); line-height: 1.5; max-height: 180px; overflow-y: auto; white-space: pre-wrap; background: white; padding: 10px; border-radius: 4px; border: 1px solid var(--color-hairline-gray, #e5e7eb);" id="ai-preview-body-text">Body...</div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px;">
+          <button type="button" id="ai-email-cancel-btn" class="btn btn-outline" style="font-size: 13px;">Cancel</button>
+          <button type="button" id="ai-email-generate-btn" class="btn btn-primary" style="font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Email
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION POPUP -->
+  <div id="toast" class="toast-notification">
+    <i class="fa-solid fa-circle-check" style="color: var(--success);" id="toast-icon"></i>
+    <span id="toast-message">Action successful!</span>
+  </div>
+
+  <!-- MODAL DIALOG (NEWS DETAILED / TIMELINE DETAILS / APPLICANT DETAILS) -->
+  <div id="info-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Details</h3>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Dynamic details inject -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

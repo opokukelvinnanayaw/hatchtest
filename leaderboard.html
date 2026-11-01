@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="r86ry8TJMrzBwxZ9kA6YAYDc7mxfmMRz8oLlBJ1iLx0" />
+  <title>Shortlist Leaderboard | The HatchPoint Innovations Challenge: Nyansapo Edition</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background-color: var(--bg-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .leaderboard-header {
+      text-align: center;
+      padding: 140px 20px 60px;
+      position: relative;
+    }
+    .leaderboard-title {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--text-main), var(--text-muted));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      margin-bottom: 16px;
+    }
+    .leaderboard-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .leaderboard-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+      width: 100%;
+    }
+    .team-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      height: 88px; /* fixed height so all cards are uniform */
+      box-sizing: border-box;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+      overflow: hidden;
+    }
+    .team-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
+      background: rgba(255, 255, 255, 0.8);
+    }
+    .team-avatar {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.25);
+    }
+    .team-info {
+      flex-grow: 1;
+      min-width: 0; /* allow flex children to shrink/truncate */
+    }
+    .team-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .team-rank {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .loading-state, .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state i {
+      font-size: 48px;
+      color: var(--border);
+      margin-bottom: 16px;
+    }
+
+    /* ── Shortlisted badge ────────────────────────── */
+    .team-rank {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 6px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      font-size: 10px;
+      font-weight: 700;
+      color: #16a34a;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Mobile close button ──────────────────────── */
+    .lb-mobile-close {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .lb-mobile-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        background: var(--text-main);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 14px 32px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        text-decoration: none;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+      }
+      .lb-mobile-close:active {
+        transform: translateX(-50%) scale(0.96);
+      }
+      /* extra bottom padding so last card isn't hidden behind button */
+      .leaderboard-container {
+        padding-bottom: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="index.html" class="logo">
+          <div class="logo-icon" style="background: transparent; padding: 0;">
+            <img src="favicon.png" alt="HatchPoint Logo" style="width: 32px; height: 32px; object-fit: contain; border-radius: 8px;">
+          </div>
+          <span>Hatch<span class="logo-text-accent">Point</span></span>
+        </a>
+      </div>
+      <div class="nav-auth">
+        <a href="index.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="leaderboard-header">
+    <h1 class="leaderboard-title">Official Shortlist</h1>
+    <p class="leaderboard-subtitle">Congratulations to the outstanding teams that have advanced to the next phase of The HatchPoint Innovations Challenge. Teams are displayed in no particular order.</p>
+  </div>
+
+  <div class="leaderboard-container" id="leaderboard-list">
+    <div class="loading-state">
+      <i class="fa-solid fa-spinner fa-spin" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+      <p>Loading shortlisted teams...</p>
+    </div>
+  </div>
+
+  <!-- Mobile close / back button -->
+  <a href="index.html" class="lb-mobile-close">
+    <i class="fa-solid fa-xmark"></i> Close
+  </a>
+
+  <footer style="margin-top: auto; padding: 24px 20px; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; background: transparent;">
+    &copy; 2026 The HatchPoint Innovations Challenge: Nyansapo Edition. All rights reserved.
+  </footer>
+
+  <!-- Main Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, query, where, getDocs, doc, setDoc, addDoc, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA91WlL0vnYEYZcQo51KTDMWPPSw1eZayM",
+      authDomain: "the-tech-x.firebaseapp.com",
+      projectId: "the-tech-x",
+      storageBucket: "the-tech-x.firebasestorage.app",
+      messagingSenderId: "997772121695",
+      appId: "1:997772121695:web:0fb74ffa3bc64240a66dea",
+      measurementId: "G-VQ00H9FPKF"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Fetch and render approved projects
+    async function loadLeaderboard() {
+      const container = document.getElementById("leaderboard-list");
+      try {
+        const q = query(collection(db, "projects"), where("status", "==", "Approved"));
+        const snapshot = await getDocs(q);
+        
+        let teams = [];
+        snapshot.forEach(doc => {
+          teams.push({ id: doc.id, ...doc.data() });
+        });
+
+        if (teams.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <i class="fa-solid fa-trophy"></i>
+              <h3>No teams shortlisted yet</h3>
+              <p>The official shortlist will be published here once evaluations are complete.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Randomize array (Fisher-Yates shuffle) so there is no implied ranking
+        for (let i = teams.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [teams[i], teams[j]] = [teams[j], teams[i]];
+        }
+
+        container.innerHTML = teams.map((team, index) => {
+          const initial = team.teamName ? team.teamName.charAt(0).toUpperCase() : "T";
+          return `
+            <div class="team-card" style="animation-delay: ${index * 0.05}s">
+              <div class="team-avatar">${initial}</div>
+              <div class="team-info">
+                <div class="team-name">${team.teamName}</div>
+                <div class="team-rank"><i class="fa-solid fa-circle-check"></i> Shortlisted</div>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+      } catch (err) {
+        console.error("Error loading leaderboard:", err);
+        container.innerHTML = `<div class="loading-state"><p style="color: var(--danger);">Failed to load leaderboard. Please try again later.</p></div>`;
+      }
+    }
+
+    // Load on page ready
+    document.addEventListener("DOMContentLoaded", () => {
+      loadLeaderboard();
+      
+      // Analytics Tracking
+      const urlParams = new URLSearchParams(window.location.search);
+      const isShareClick = urlParams.has("ref") && urlParams.get("ref") === "share";
+      
+      setDoc(doc(db, "analytics", "traffic"), {
+        total_page_views: increment(1)
+      }, { merge: true }).catch(err => console.warn("Analytics Error:", err));
+
+      addDoc(collection(db, "analytics", "traffic", "visits"), {
+        path: window.location.pathname,
+        timestamp: serverTimestamp(),
+        isShareClick: isShareClick
+      }).catch(err => console.warn("Detailed Analytics Error:", err));
+
+      if (isShareClick) {
+        setDoc(doc(db, "analytics", "traffic"), {
+          shared_link_clicks: increment(1)
+        }, { merge: true }).catch(err => console.warn("Analytics Error:", err));
+      }
+    });
+  </script>
+</body>
+</html>

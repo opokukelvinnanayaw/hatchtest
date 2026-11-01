@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="r86ry8TJMrzBwxZ9kA6YAYDc7mxfmMRz8oLlBJ1iLx0" />
+  <title>Registration Successful | The HatchPoint Innovations Challenge: Nyansapo Edition</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Chivo+Mono:wght@400;600;700&family=Public+Sans:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="near challenge/variables.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .success-card {
+      background: var(--color-paper-white, #ffffff);
+      border: 1px solid var(--color-ink-black, #000000);
+      border-radius: var(--radius-xl, 12px);
+      max-width: 560px;
+      width: 100%;
+      overflow: hidden;
+      animation: scaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes scaleUp {
+      from { transform: translateY(16px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .success-banner {
+      background: var(--color-pixel-lime, #f1ffd2);
+      border-bottom: 1px solid var(--color-hairline-gray, #e5e7eb);
+      padding: 28px 32px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--color-ink-black, #000000);
+      border-radius: var(--radius-md, 4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-pixel-lime, #f1ffd2);
+      font-size: 26px;
+      margin: 0 auto 16px;
+    }
+    .success-body {
+      padding: 28px 32px 32px;
+      text-align: center;
+    }
+    .wa-success-box {
+      margin: 0 0 22px 0;
+      padding: 20px 18px;
+      background: var(--color-fog-surface, #f4f4f5);
+      border: 1px solid var(--color-hairline-gray, #e5e7eb);
+      border-radius: var(--radius-lg, 8px);
+      text-align: center;
+    }
+    .btn-wa-join {
+      background-color: #16a34a;
+      color: #ffffff !important;
+      border: 1px solid #15803d;
+      font-family: var(--font-publicsansrounded);
+      font-size: 14.5px;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: var(--radius-buttons, 4px);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      transition: background-color 0.15s ease;
+    }
+    .btn-wa-join:hover {
+      background-color: #15803d;
+    }
+    .countdown-text {
+      font-family: var(--font-chivo-mono, monospace);
+      font-size: 12px;
+      color: var(--color-ash, #787882);
+      margin-top: 18px;
+    }
+    @media (max-width: 600px) {
+      .success-banner, .success-body {
+        padding: 22px 18px;
+      }
+    }
+  </style>
+</head>
+<body class="fal-layout fal-register-page">
+  <div class="success-card">
+    <div class="success-banner">
+      <div class="success-icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <span style="font-family: var(--font-chivo-mono, monospace); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-forest-pixel, #004012); display: block; margin-bottom: 6px;">STATUS // APPLICATION LOGGED</span>
+      <h2 style="font-family: var(--font-focal); font-size: 30px; font-weight: 800; letter-spacing: -0.8px; margin: 0 0 6px; color: var(--color-ink-black, #000000);">Registration Submitted.</h2>
+      <p style="font-family: var(--font-focal); font-size: 14.5px; color: var(--color-slate-body, #383a42); line-height: 1.5; margin: 0;">
+        Your team profile and concept note have been recorded for vetting.
+      </p>
+    </div>
+
+    <div class="success-body">
+      <!-- MANDATORY WHATSAPP GROUP CARD -->
+      <div class="wa-success-box">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+          <i class="fa-brands fa-whatsapp" style="font-size: 22px; color: #16a34a;"></i>
+          <h3 style="font-family: var(--font-focal); font-size: 16px; font-weight: 800; color: var(--color-ink-black, #000000); margin: 0;">Required Next Step: Join WhatsApp Community</h3>
+        </div>
+        <p style="font-family: var(--font-focal); font-size: 13.5px; color: var(--color-slate-body, #383a42); line-height: 1.5; margin: 0 0 16px 0;">
+          All <strong>1st to 3rd year undergraduate participants</strong> must join the official HatchPoint WhatsApp Group for real-time announcements, mentorship guidance, and challenge updates.
+        </p>
+        <a id="success-wa-join-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-wa-join">
+          <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> Join Official WhatsApp Group →
+        </a>
+        <div style="margin-top: 12px; font-family: var(--font-chivo-mono, monospace); font-size: 11px; color: var(--color-ash, #787882); display: flex; align-items: center; justify-content: center; gap: 6px;">
+          <i class="fa-solid fa-compass" style="color: #16a34a;"></i>
+          <span>Accessible anytime via the floating WhatsApp button on any page.</span>
+        </div>
+      </div>
+
+      <a href="index.html" class="fal-btn fal-btn-outline btn-block" style="width: 100%; height: 44px; font-size: 14px; border-radius: 4px;">
+        <i class="fa-solid fa-arrow-left"></i> Return to Home Page
+      </a>
+      <div class="countdown-text" id="countdown-container">
+        REDIRECTING TO HOME IN <span id="countdown-seconds" style="font-weight: 700; color: var(--color-electric-violet, #6120ee);">15</span>S...
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA91WlL0vnYEYZcQo51KTDMWPPSw1eZayM",
+      authDomain: "the-tech-x.firebaseapp.com",
+      projectId: "the-tech-x",
+      storageBucket: "the-tech-x.firebasestorage.app",
+      messagingSenderId: "997772121695",
+      appId: "1:997772121695:web:0fb74ffa3bc64240a66dea",
+      measurementId: "G-VQ00H9FPKF"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const firestore = getFirestore(app);
+
+    const waBtn = document.getElementById("success-wa-join-btn");
+
+    async function loadWaLink() {
+      try {
+        const docSnap = await getDoc(doc(firestore, "settings", "whatsapp_widget"));
+        if (docSnap.exists() && docSnap.data().groupLink) {
+          waBtn.href = docSnap.data().groupLink;
+        }
+      } catch (err) {
+        console.warn("Could not load WhatsApp link directly:", err);
+      }
+    }
+    loadWaLink();
+
+    let secondsLeft = 15;
+    const countdownEl = document.getElementById("countdown-seconds");
+    const interval = setInterval(() => {
+      secondsLeft--;
+      if (countdownEl) countdownEl.textContent = secondsLeft;
+      if (secondsLeft <= 0) {
+        clearInterval(interval);
+        window.location.href = "index.html";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

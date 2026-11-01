@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="r86ry8TJMrzBwxZ9kA6YAYDc7mxfmMRz8oLlBJ1iLx0" />
+  <title>Team Registration | The HatchPoint Innovations Challenge: Nyansapo Edition</title>
+  <meta name="description"
+    content="Register your team of 3 to 5 members and submit your concept note for The HatchPoint Innovations Challenge: Nyansapo Edition.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Preconnect and Load Generative Design System Fonts & Tokens -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Chivo+Mono:wght@400;600;700&family=Public+Sans:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="near challenge/variables.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="fal-layout fal-register-page" style="min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Top Announcement Bar (Lilac Wash #d0b7f9 — hidden on mobile <= 768px) -->
+  <div class="fal-announcement-bar">
+    <span>✦ <strong>NYANSAPO EDITION PORTAL:</strong> Team registration closes in <strong id="banner-cd-timer" style="font-family: var(--font-chivo-mono);">Loading...</strong> &bull; <a href="index.html">Explore Challenge Overview →</a></span>
+  </div>
+
+  <!-- Navigation Bar (HatchPoint Generative Design System) -->
+  <header class="fal-nav">
+    <div class="fal-nav-container">
+      <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+        <a href="index.html" class="fal-logo" id="nav-logo" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+          <img src="favicon.png" alt="HatchPoint Logo" style="width: 26px; height: 26px; object-fit: contain; border-radius: 4px;">
+          <span style="font-family: var(--font-focal); font-size: 20px; font-weight: 800; letter-spacing: -0.04em; color: var(--color-ink-black, #000000);">HATCHPOINT</span>
+          <span class="fal-logo-badge" style="background: var(--color-pixel-lime, #f1ffd2); color: var(--color-forest-pixel, #004012); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(0, 64, 18, 0.15);">NYANSAPO</span>
+        </a>
+        <div class="nav-logos fal-nav-cohosts" style="display: flex; align-items: center; gap: 8px; margin-left: 4px;">
+          <div style="width: 1px; height: 16px; background: var(--color-hairline-gray, #e5e7eb);"></div>
+          <img src="logo_knust.png" alt="KNUST Logo" style="height: 18px; width: auto; object-fit: contain;" title="KNUST">
+          <div style="width: 1px; height: 12px; background: var(--color-hairline-gray, #e5e7eb);"></div>
+          <img src="logo_ksb.png" alt="KSB Logo" style="height: 18px; width: auto; object-fit: contain;" title="KSB Innovations Lab">
+        </div>
+      </div>
+
+      <nav class="nav-links fal-nav-links">
+        <a href="index.html#tracks" class="fal-nav-link">Tracks</a>
+        <a href="index.html#about" class="fal-nav-link">Overview</a>
+        <a href="index.html#timeline" class="fal-nav-link">Milestones</a>
+        <a href="index.html#resources" class="fal-nav-link">Resources</a>
+        <a href="leaderboard.html" class="fal-nav-link" id="reg-nav-leaderboard-link" style="display: none; color: var(--color-electric-violet, #6120ee); font-weight: 700;">Leaderboard</a>
+      </nav>
+
+      <div class="nav-auth">
+        <a href="index.html" class="fal-btn fal-btn-outline" style="padding: 7px 14px; height: 34px; font-size: 13px; border-radius: 4px;">
+          <i class="fa-solid fa-arrow-left" style="font-size: 11px;"></i> Back to Home
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Rules & Guidelines Modal Overlay -->
+  <div id="rules-modal" class="rules-modal-overlay active">
+    <div class="rules-modal-card">
+      <div class="rules-modal-header">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 40px; height: 40px; border-radius: 4px; background: var(--color-pixel-lime, #f1ffd2); color: var(--color-forest-pixel, #004012); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fa-solid fa-scale-balanced" style="color: var(--color-forest-pixel, #004012); font-size: 18px;"></i>
+          </div>
+          <div>
+            <span style="font-family: var(--font-chivo-mono, monospace); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--color-pixel-lime, #f1ffd2); text-transform: uppercase; display: block; margin-bottom: 2px;">PROTOCOL // 00 — MANDATORY BRIEFING</span>
+            <h3>Rules &amp; Guidelines.</h3>
+          </div>
+        </div>
+        <span style="font-family: var(--font-chivo-mono, monospace); font-size: 11px; color: #a1a1aa; border: 1px solid rgba(255,255,255,0.18); padding: 3px 8px; border-radius: 4px; white-space: nowrap;">5 CHECKPOINTS</span>
+      </div>
+      <div class="rules-modal-body">
+        <p class="rules-modal-intro">
+          Welcome to <strong>The HatchPoint Innovations Challenge: Nyansapo Edition</strong>. Before unlocking the team application portal, please review and acknowledge the official participation requirements below:
+        </p>
+        <div class="rules-list">
+          <div class="rules-item">
+            <div class="rules-icon-wrap" style="background: var(--color-pixel-lime, #f1ffd2); color: var(--color-forest-pixel, #004012);">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="rules-item-content">
+              <h4>01 / Undergraduate Eligibility (1st – 3rd Year Only)</h4>
+              <p>The challenge is strictly open to <strong>1st, 2nd, and 3rd year undergraduate students (100 to 300 Level)</strong> across all academic departments. All team members must be within 1st to 3rd year.</p>
+            </div>
+          </div>
+
+          <div class="rules-item">
+            <div class="rules-icon-wrap" style="background: #dcfce7; color: #166534;">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div class="rules-item-content">
+              <h4>02 / Mandatory WhatsApp Community Join</h4>
+              <p>After completing registration, all team members are required to join the official HatchPoint WhatsApp group for live announcements, mentor connections, and event updates.</p>
+              <div style="margin-top: 8px; font-size: 12.5px; color: var(--color-ink-black, #000000); background: var(--color-paper-white, #ffffff); padding: 10px 12px; border-radius: 4px; border: 1px solid var(--color-hairline-gray, #e5e7eb);">
+                <strong style="font-family: var(--font-chivo-mono, monospace); font-size: 11px; text-transform: uppercase; color: var(--color-forest-pixel, #004012);"><i class="fa-solid fa-compass"></i> Where to join the WhatsApp Group:</strong>
+                <ul style="margin: 6px 0 0 16px; padding: 0; line-height: 1.5; color: var(--color-slate-body, #383a42);">
+                  <li><strong>Post-Registration Screen:</strong> A direct <em>"Join WhatsApp Group"</em> button is presented immediately upon submitting your team registration.</li>
+                  <li><strong>Floating Icon on Site:</strong> Click the green floating WhatsApp widget at the bottom-right corner of any page at any time.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="rules-item">
+            <div class="rules-icon-wrap" style="background: var(--color-sky-cyan, #99ecff); color: var(--color-cobalt-pixel, #0a4dce);">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="rules-item-content">
+              <h4>03 / Information &amp; Proposal Integrity</h4>
+              <p>All registration details, member profiles, and submitted concept proposals must be 100% truthful, original, and free of plagiarism. Misrepresentation or false credentials will result in immediate disqualification.</p>
+            </div>
+          </div>
+
+          <div class="rules-item">
+            <div class="rules-icon-wrap" style="background: var(--color-lilac-wash, #d0b7f9); color: var(--color-deep-ultraviolet, #4a17b0);">
+              <i class="fa-solid fa-address-book"></i>
+            </div>
+            <div class="rules-item-content">
+              <h4>04 / Verified Contact Channels</h4>
+              <p>The phone numbers and email addresses you provide for all team members will serve as the official channel of communication for interviews, updates, and coordinator feedback. Please ensure they are active and accurate.</p>
+            </div>
+          </div>
+
+          <div class="rules-item">
+            <div class="rules-icon-wrap" style="background: var(--color-bubblegum-pink, #ffddfa); color: var(--color-ink-black, #000000);">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="rules-item-content">
+              <h4>05 / Team Composition (3 to 5 Members)</h4>
+              <p>Teams must consist of <strong>minimum 3 and maximum 5 undergraduate members</strong>. Multidisciplinary teams combining engineering, product design, and business strategy are strongly encouraged.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rules-modal-footer">
+        <div class="rules-agree-wrap">
+          <div class="rules-agree-label">
+            <span class="rules-agree-title">I Understand &amp; Accept the Challenge Protocol</span>
+            <span class="rules-agree-desc">TOGGLE SWITCH TO UNLOCK APPLICATION PORTAL</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="rules-agree-toggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Registration View Container -->
+  <main class="auth-main register-main">
+    <div class="auth-card hidden" id="register-card">
+
+      <!-- Architectural Sky-Cyan Header Band -->
+      <div class="fal-reg-hero-banner">
+        <!-- 8-Bit Geometric Pixel Grid Decor (Desktop Only) -->
+        <div class="fal-reg-hero-decor" aria-hidden="true">
+          <svg width="160" height="120" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="88" y="8" width="16" height="16" fill="#000000"/>
+            <rect x="104" y="24" width="16" height="16" fill="#6120ee"/>
+            <rect x="120" y="8" width="16" height="16" fill="#f1ffd2" stroke="#000000" stroke-width="1.5"/>
+            <rect x="136" y="24" width="16" height="16" fill="#000000"/>
+            <rect x="72" y="40" width="16" height="16" fill="#ffddfa" stroke="#000000" stroke-width="1.5"/>
+            <rect x="104" y="56" width="16" height="16" fill="#000000"/>
+            <rect x="120" y="40" width="16" height="16" fill="#d0b7f9" stroke="#000000" stroke-width="1.5"/>
+            <rect x="136" y="72" width="16" height="16" fill="#6120ee"/>
+          </svg>
+        </div>
+
+        <div class="fal-reg-hero-content">
+          <div class="fal-reg-eyebrow-row">
+            <span class="fal-reg-eyebrow">
+              <i class="fa-solid fa-terminal" style="font-size: 10px;"></i> PORTAL // TEAM APPLICATION
+            </span>
+            <!-- Page Logos shown on desktop, hidden on mobile via .page-logos -->
+            <div class="page-logos" style="display: inline-flex; align-items: center; gap: 10px; background: var(--color-paper-white, #ffffff); padding: 5px 12px; border-radius: 4px; border: 1px solid var(--color-ink-black, #000000);">
+              <img src="logo_knust.png" alt="KNUST Logo" style="height: 20px; object-fit: contain;">
+              <div style="width: 1px; height: 14px; background: var(--color-hairline-gray, #e5e7eb);"></div>
+              <img src="logo_ksb.png" alt="KSB Logo" style="height: 20px; object-fit: contain;">
+            </div>
+          </div>
+
+          <h1 class="fal-reg-title">Team Registration.</h1>
+          <p class="fal-reg-subtitle">Register your founding team of 3 to 5 undergraduate builders and upload your innovation concept note for vetting.</p>
+
+          <div class="fal-reg-meta-strip">
+            <div class="reg-eligibility-badge">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span><strong>ELIGIBILITY:</strong> 1ST – 3RD YEAR UNDERGRADUATES</span>
+            </div>
+
+            <div id="register-deadline-badge" class="reg-deadline-badge">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span class="reg-deadline-content">
+                <strong class="reg-deadline-title"><span class="reg-title-full">DEADLINE: </span></strong>
+                <span id="register-cd-text" class="reg-deadline-time">Loading countdown...</span>
+              </span>
+            </div>
+
+            <button type="button" id="btn-show-rules" class="fal-btn-rules-trigger">
+              <i class="fa-solid fa-scale-balanced"></i> Review Rules &amp; Protocol
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Registration Form Body -->
+      <div class="fal-reg-body">
+        <form id="team-registration-form">
+
+          <!-- SECTION 01: TEAM & TRACK IDENTITY -->
+          <div class="fal-reg-section">
+            <div class="fal-reg-section-header">
+              <div class="fal-reg-section-title-group">
+                <span class="fal-reg-section-index">01 / IDENTITY</span>
+                <h3 class="fal-reg-section-title">Team &amp; Challenge Track</h3>
+              </div>
+              <span style="font-family: var(--font-chivo-mono, monospace); font-size: 11px; color: var(--color-ash, #787882);">REQUIRED METADATA</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reg-team-name">Team / Startup Name <span style="color: var(--color-electric-violet, #6120ee);">*</span></label>
+                <input type="text" id="reg-team-name" class="form-control" placeholder="e.g. EcoSphere Founders" required>
+              </div>
+              <div class="form-group">
+                <label for="reg-project-track">
+                  Challenge Track <span style="font-weight: 500; color: var(--color-ash, #787882); font-size: 12px;">(Optional / Open)</span>
+                  <i id="track-info-icon" class="fa-regular fa-circle-question" title="Tracks allow you to align your project with a specific industry theme for specialized judging and prizes. If your innovation doesn't fit a specific category, select 'Open Track'." style="color: var(--color-electric-violet, #6120ee); cursor: help; font-size: 13px;"></i>
+                </label>
+                <select id="reg-project-track" class="form-control">
+                  <option value="" selected>Open Track (Open to all innovations)</option>
+                  <!-- Dynamic options loaded from Firebase tracks collection -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 02: FOUNDING TEAM ROSTER -->
+          <div class="fal-reg-section">
+            <div class="fal-reg-section-header">
+              <div class="fal-reg-section-title-group">
+                <span class="fal-reg-section-index">02 / ROSTER</span>
+                <h3 class="fal-reg-section-title">Co-Founding Team Members</h3>
+              </div>
+              <span style="font-family: var(--font-chivo-mono, monospace); font-size: 11px; color: var(--color-ash, #787882);">3 TO 5 UNDERGRADUATES</span>
+            </div>
+
+            <!-- Dynamic Team Members Container -->
+            <div id="members-container">
+              <!-- Member 1 (Lead) -->
+              <div class="registration-member-card" id="member-card-1">
+                <div class="member-card-header">
+                  <h4 class="member-card-title"><i class="fa-solid fa-user-gear"></i> Member 1 (Team Lead)</h4>
+                  <span class="fal-member-role-tag fal-member-role-lead">PRIMARY CONTACT</span>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="reg-m1-name">Full Name</label>
+                    <input type="text" id="reg-m1-name" class="form-control" placeholder="Abena Osei" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-m1-email">Email Address</label>
+                    <input type="email" id="reg-m1-email" class="form-control" placeholder="abena.osei@gmail.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-m1-contact">Contact Number</label>
+                    <input type="tel" id="reg-m1-contact" class="form-control" value="+233 " placeholder="+233 24 123 4567" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Member 2 -->
+              <div class="registration-member-card" id="member-card-2">
+                <div class="member-card-header">
+                  <h4 class="member-card-title"><i class="fa-solid fa-user"></i> Member 2</h4>
+                  <span class="fal-member-role-tag fal-member-role-core">CO-FOUNDER</span>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="reg-m2-name">Full Name</label>
+                    <input type="text" id="reg-m2-name" class="form-control" placeholder="Kofi Mensah" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-m2-email">Email Address</label>
+                    <input type="email" id="reg-m2-email" class="form-control" placeholder="kofi.mensah@gmail.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-m2-contact">Contact Number</label>
+                    <input type="tel" id="reg-m2-contact" class="form-control" value="+233 " placeholder="+233 24 123 4567" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Member 3 -->
+              <div class="registration-member-card" id="member-card-3">
+                <div class="member-card-header">
+                  <h4 class="member-card-title"><i class="fa-solid fa-user"></i> Member 3</h4>
+                  <span class="fal-member-role-tag fal-member-role-builder">CO-FOUNDER</span>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="reg-m3-name">Full Name</label>
+                    <input type="text" id="reg-m3-name" class="form-control" placeholder="Kwame Asante" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-m3-email">Email Address</label>
+                    <input type="email" id="reg-m3-email" class="form-control" placeholder="kwame.asante@gmail.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-m3-contact">Contact Number</label>
+                    <input type="tel" id="reg-m3-contact" class="form-control" value="+233 " placeholder="+233 24 123 4567" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Team Member Controls -->
+            <div class="team-members-controls">
+              <div class="fal-member-counter-text">
+                <i class="fa-solid fa-users" style="color: var(--color-ink-black, #000000);"></i>
+                <span>ACTIVE ROSTER: <strong id="member-count-badge" class="fal-member-counter-badge">3</strong> / 5 MEMBERS (MIN: 3, MAX: 5)</span>
+              </div>
+              <button type="button" id="btn-add-member" class="fal-btn fal-btn-dark" style="padding: 8px 14px; font-size: 13px; border-radius: 4px;">
+                <i class="fa-solid fa-user-plus" style="font-size: 12px;"></i> Add Team Member
+              </button>
+            </div>
+          </div>
+
+          <!-- SECTION 03: CONCEPT NOTE & PROPOSAL DOCUMENT -->
+          <div class="fal-reg-section">
+            <div class="fal-reg-section-header">
+              <div class="fal-reg-section-title-group">
+                <span class="fal-reg-section-index">03 / PROPOSAL</span>
+                <h3 class="fal-reg-section-title">Executive Summary &amp; Concept Deck</h3>
+              </div>
+              <span style="font-family: var(--font-chivo-mono, monospace); font-size: 11px; color: var(--color-ash, #787882);">VETTING DELIVERABLES</span>
+            </div>
+
+            <!-- Project Summary Note (Max 1000 words) -->
+            <div class="form-group" style="margin-bottom: 22px;">
+              <label for="reg-summary-note">
+                Project Summary Note
+                <span style="font-family: var(--font-chivo-mono, monospace); font-weight: 500; font-size: 11.5px; color: var(--color-ash, #787882);">(Max 1,000 words)</span>
+              </label>
+              <textarea id="reg-summary-note" class="form-control" rows="5"
+                placeholder="Outline the real-world problem your team is solving, your technical architecture or business innovation, and expected market impact..."
+                style="resize: vertical; min-height: 130px;" required></textarea>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-family: var(--font-chivo-mono, monospace); font-size: 11.5px; color: var(--color-ash, #787882);">
+                <span>CLEAR PROBLEM STATEMENT &amp; SOLUTION ARCHITECTURE</span>
+                <span id="summary-word-count" style="font-weight: 700; color: var(--color-ink-black, #000000);">0 / 1000 words</span>
+              </div>
+            </div>
+
+            <!-- File Upload (DOCX, PPTX, PDF) -->
+            <div class="form-group" style="margin-bottom: 8px;">
+              <label for="reg-concept-note">
+                Proposal Document Upload
+                <span style="font-family: var(--font-chivo-mono, monospace); font-weight: 500; font-size: 11.5px; color: var(--color-ash, #787882);">(.DOCX, .PPTX, or .PDF)</span>
+              </label>
+
+              <!-- Format Notice Banner -->
+              <div class="fal-format-notice">
+                <i class="fa-solid fa-circle-info" style="color: var(--color-forest-pixel, #004012); flex-shrink: 0; font-size: 15px;"></i>
+                <span><strong>FORMAT RECOMMENDATION:</strong> We strongly encourage uploading your proposal document in <strong>.DOCX</strong> format for optimal review (.pptx and .pdf are also accepted, max 2.5 MB).</span>
+              </div>
+
+              <!-- Drop Zone -->
+              <div class="file-upload-zone" id="file-upload-zone">
+                <input type="file" id="reg-concept-note" accept=".docx,.pptx,.pdf" required>
+
+                <!-- Idle / Drag state shown here -->
+                <div class="file-upload-idle" id="file-upload-idle">
+                  <div class="file-upload-icon-wrap">
+                    <div class="file-upload-icon-ring"></div>
+                    <i class="fa-solid fa-cloud-arrow-up file-upload-icon"></i>
+                  </div>
+                  <span class="file-upload-label" id="file-upload-label">Click to browse or drag &amp; drop proposal file</span>
+                  <span class="file-upload-hint">.DOCX &nbsp;&bull;&nbsp; .PPTX &nbsp;&bull;&nbsp; .PDF &nbsp;&bull;&nbsp; MAX 2.5 MB</span>
+                </div>
+
+                <!-- Selected file info chip (hidden until file chosen) -->
+                <div class="file-upload-info" id="file-upload-info" style="display:none;">
+                  <div class="file-upload-type-icon" id="file-upload-type-icon"><i class="fa-solid fa-file"></i></div>
+                  <div class="file-upload-meta">
+                    <span class="file-upload-name" id="file-upload-name"></span>
+                    <span class="file-upload-size" id="file-upload-size"></span>
+                  </div>
+                  <button type="button" class="file-upload-remove" id="file-upload-remove" title="Remove file">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Progress bar (hidden until upload starts) -->
+              <div class="upload-progress-wrap" id="upload-progress-wrap" style="display:none;">
+                <div class="upload-progress-track">
+                  <div class="upload-progress-bar" id="upload-progress-bar" style="width:0%"></div>
+                </div>
+                <span class="upload-progress-label" id="upload-progress-label">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Custom Fields Container -->
+          <div id="dynamic-custom-fields-container" style="margin-bottom: 24px;"></div>
+
+          <!-- Submit CTA -->
+          <button type="submit" class="fal-btn fal-btn-dark btn-block" style="width: 100%; height: 48px; font-size: 15px; font-weight: 700; border-radius: 4px; margin-top: 8px;">
+            <i class="fa-solid fa-paper-plane"></i> Submit Team Registration →
+          </button>
+        </form>
+
+        <div class="auth-footer" style="font-family: var(--font-chivo-mono, monospace); font-size: 11.5px; color: var(--color-ash, #787882); text-align: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--color-hairline-gray, #e5e7eb);">
+          <i class="fa-solid fa-shield-check" style="color: var(--color-forest-pixel, #004012);"></i> ENCRYPTED SUBMISSION // ROUTED DIRECTLY TO KSB INNOVATIONS LAB VETTING PANEL
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section (Hidden on mobile <= 768px via #footer-section rule) -->
+  <footer id="footer-section" style="margin-top: auto; background: var(--color-paper-white, #ffffff); border-top: 1px solid var(--color-hairline-gray, #e5e7eb); padding: 20px 0;">
+    <div class="fal-hero-container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-chivo-mono, monospace); font-size: 12px; color: var(--color-ash, #787882);">
+      <div>&copy; 2026 THE HATCHPOINT INNOVATIONS CHALLENGE: NYANSAPO EDITION.</div>
+      <div>KSB INNOVATIONS LAB &times; KNUST</div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html#home" class="mobile-bottom-nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="register.html" class="mobile-bottom-nav-item active">
+      <i class="fa-solid fa-user-plus"></i>
+      <span>Register</span>
+    </a>
+    <a href="index.html#resources" class="mobile-bottom-nav-item">
+      <i class="fa-solid fa-folder-open"></i>
+      <span>Resources</span>
+    </a>
+    <a href="index.html#news" class="mobile-bottom-nav-item">
+      <i class="fa-solid fa-newspaper"></i>
+      <span>News</span>
+    </a>
+  </div>
+
+  <!-- TOAST NOTIFICATION POPUP -->
+  <div id="toast" class="toast-notification">
+    <i class="fa-solid fa-circle-check" style="color: var(--success);" id="toast-icon"></i>
+    <span id="toast-message">Action successful!</span>
+  </div>
+
+  <!-- FLOATING WHATSAPP GROUP WIDGET -->
+  <div id="whatsapp-floating-widget" style="display: none;">
+    <!-- FLOATING POPUP MENU CARD -->
+    <div class="whatsapp-menu-popup" id="whatsapp-menu-popup">
+      <div class="whatsapp-popup-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="wa-header-icon-box">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <div>
+            <h4 style="margin: 0; font-size: 14px; font-weight: 700; color: white;">HatchPoint WhatsApp Community</h4>
+            <span class="wa-online-status"><i class="fa-solid fa-circle"></i> Official Group</span>
+          </div>
+        </div>
+        <button id="close-whatsapp-popup" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="whatsapp-popup-body">
+        <p id="whatsapp-popup-text" style="font-size: 13px; color: #475569; margin: 0 0 14px; line-height: 1.5;">
+          Join our official WhatsApp group to connect with fellow participants, receive live event updates, and get instant answers!
+        </p>
+
+        <!-- CTA Direct Group Join Link -->
+        <a id="whatsapp-popup-join-btn" href="#" target="_blank" class="whatsapp-cta-btn">
+          <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i>
+          <span>Join WhatsApp Group</span>
+          <i class="fa-solid fa-arrow-right-long" style="margin-left: auto; font-size: 14px; opacity: 0.8;"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- FLOATING WHATSAPP LOGO BUTTON -->
+    <div class="whatsapp-float-btn" id="whatsapp-float-btn" title="Join WhatsApp Group">
+      <div class="whatsapp-pulse-ring"></div>
+      <i class="fa-brands fa-whatsapp"></i>
+      <span class="whatsapp-tooltip-badge" id="whatsapp-tooltip-badge">Join Group</span>
+    </div>
+  </div>
+
+  <!-- FLOATING TIKTOK COMMUNITY WIDGET -->
+  <div id="tiktok-floating-widget" style="display: none;">
+    <!-- FLOATING POPUP MENU CARD -->
+    <div class="tiktok-menu-popup" id="tiktok-menu-popup">
+      <div class="tiktok-popup-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="tt-header-icon-box">
+            <i class="fa-brands fa-tiktok"></i>
+          </div>
+          <div>
+            <h4 style="margin: 0; font-size: 14px; font-weight: 700; color: white;">HatchPoint on TikTok</h4>
+            <span class="tt-online-status"><i class="fa-solid fa-circle"></i> Official Channel</span>
+          </div>
+        </div>
+        <button id="close-tiktok-popup" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="tiktok-popup-body">
+        <p id="tiktok-popup-text" style="font-size: 13px; color: #475569; margin: 0 0 14px; line-height: 1.5;">
+          Follow our official TikTok for challenge highlights, student pitches, backstage moments, and announcements!
+        </p>
+
+        <!-- CTA Direct Watch / Follow Link -->
+        <a id="tiktok-popup-watch-btn" href="#" target="_blank" rel="noopener noreferrer" class="tiktok-cta-btn">
+          <i class="fa-brands fa-tiktok" style="font-size: 18px;"></i>
+          <span>Watch &amp; Follow on TikTok</span>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: auto; font-size: 13px; opacity: 0.85;"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- FLOATING TIKTOK LOGO BUTTON -->
+    <div class="tiktok-float-btn" id="tiktok-float-btn" title="Watch on TikTok">
+      <div class="tiktok-pulse-ring"></div>
+      <i class="fa-brands fa-tiktok"></i>
+      <span class="tiktok-tooltip-badge" id="tiktok-tooltip-badge">Watch on TikTok</span>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script type="module" src="register.js"></script>
+</body>
+
+</html>
