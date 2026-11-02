@@ -1,224 +1,689 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="google-site-verification" content="r86ry8TJMrzBwxZ9kA6YAYDc7mxfmMRz8oLlBJ1iLx0" />
-  <title>Shortlist Leaderboard | The HatchPoint Innovations Challenge: Nyansapo Edition</title>
+  <title>Approved Teams Leaderboard | The HatchPoint Innovations Challenge: Nyansapo Edition</title>
+  <meta name="description"
+    content="Official leaderboard showing the verified list of student innovation teams approved by the admin panel for The HatchPoint Innovations Challenge: Nyansapo Edition. Co-hosted by KNUST and KSB Innovations Lab.">
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Preconnect and Load Generative Design System Fonts & Tokens -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Chivo+Mono:wght@400;600;700&family=Public+Sans:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="near challenge/variables.css">
   <link rel="stylesheet" href="styles.css">
+  <!-- FontAwesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
-    body {
-      background-color: var(--bg-body);
+    /* === LEADERBOARD GENERATIVE DESIGN SYSTEM STYLES === */
+    body.fal-leaderboard-page::before {
+      display: none !important;
+    }
+
+    body.fal-leaderboard-page {
+      background-color: var(--color-fog-surface, #f4f4f5);
+      color: var(--color-ink-black, #000000);
+      font-family: var(--font-focal), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-    .leaderboard-header {
-      text-align: center;
-      padding: 140px 20px 60px;
-      position: relative;
+
+    .fal-lb-main {
+      flex: 1 0 auto;
+      padding-top: 104px; /* clearance for fixed navbar */
+      padding-bottom: 80px;
     }
-    .leaderboard-title {
-      font-size: 42px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      background: linear-gradient(135deg, var(--text-main), var(--text-muted));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
-      margin-bottom: 16px;
-    }
-    .leaderboard-subtitle {
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 600px;
+
+    .fal-lb-container {
+      max-width: 960px;
       margin: 0 auto;
-      line-height: 1.6;
-    }
-    .leaderboard-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 20px 80px;
+      padding: 0 20px;
       width: 100%;
+      box-sizing: border-box;
     }
-    .team-card {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 20px;
-      padding: 20px 24px;
-      margin-bottom: 16px;
+
+    .fal-lb-header {
+      margin-bottom: 36px;
+    }
+
+    .fal-lb-meta-strip {
       display: flex;
       align-items: center;
-      gap: 20px;
-      height: 88px; /* fixed height so all cards are uniform */
-      box-sizing: border-box;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 1);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-      overflow: hidden;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
     }
-    .team-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
-      background: rgba(255, 255, 255, 0.8);
+
+    .fal-lb-meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-chivo-mono, monospace);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border-radius: 4px;
+      background: #ffffff;
+      border: 1px solid var(--color-hairline-gray, #e5e7eb);
+      color: var(--color-graphite, #1b1b1d);
     }
-    .team-avatar {
-      width: 52px;
-      height: 52px;
-      min-width: 52px;
+
+    .fal-lb-meta-chip.active-chip {
+      background: #dcfce7;
+      color: #166534;
+      border-color: rgba(22, 101, 52, 0.25);
+    }
+
+    .fal-lb-status-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
+      background: #16a34a;
+      box-shadow: 0 0 6px rgba(22, 163, 74, 0.8);
+      animation: pulseGreen 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* Search & Filter Toolbar */
+    .fal-lb-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: #ffffff;
+      border: 1px solid var(--color-hairline-gray, #e5e7eb);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+    }
+
+    .fal-lb-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1 1 260px;
+      position: relative;
+    }
+
+    .fal-lb-search-input {
+      width: 100%;
+      border: 1px solid var(--color-hairline-gray, #e5e7eb);
+      border-radius: 4px;
+      padding: 8px 12px 8px 34px;
+      font-family: var(--font-focal);
+      font-size: 13.5px;
+      outline: none;
+      transition: border-color 0.2s ease;
+      background: var(--color-fog-surface, #f4f4f5);
+    }
+
+    .fal-lb-search-input:focus {
+      border-color: var(--color-electric-violet, #6120ee);
+      background: #ffffff;
+    }
+
+    .fal-lb-search-icon {
+      position: absolute;
+      left: 11px;
+      color: var(--color-ash, #787882);
+      font-size: 13px;
+      pointer-events: none;
+    }
+
+    .fal-lb-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .fal-lb-filter-btn {
+      font-family: var(--font-chivo-mono, monospace);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--color-hairline-gray, #e5e7eb);
+      background: #ffffff;
+      color: var(--color-slate-body, #383a42);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .fal-lb-filter-btn:hover,
+    .fal-lb-filter-btn.active {
+      background: var(--color-ink-black, #000000);
+      color: #ffffff;
+      border-color: var(--color-ink-black, #000000);
+    }
+
+    /* Cards Grid */
+    .fal-lb-cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .fal-team-card {
+      background: #ffffff;
+      border: 1px solid var(--color-hairline-gray, #e5e7eb);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .fal-team-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+      border-color: #cbd5e1;
+    }
+
+    .fal-team-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .fal-team-avatar {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #7c3aed 0%, #6120ee 100%);
+      color: #ffffff;
+      font-family: var(--font-focal);
+      font-weight: 800;
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      font-weight: 700;
-      flex-shrink: 0;
-      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.25);
+      box-shadow: 0 4px 12px rgba(97, 32, 238, 0.25);
     }
-    .team-info {
-      flex-grow: 1;
-      min-width: 0; /* allow flex children to shrink/truncate */
+
+    .fal-team-info {
+      min-width: 0;
     }
-    .team-name {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: -0.3px;
+
+    .fal-team-name {
+      font-family: var(--font-focal);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--color-ink-black, #000000);
+      margin: 0 0 4px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 100%;
-    }
-    .team-rank {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-top: 4px;
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .loading-state, .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-muted);
-    }
-    .empty-state i {
-      font-size: 48px;
-      color: var(--border);
-      margin-bottom: 16px;
     }
 
-    /* ── Shortlisted badge ────────────────────────── */
-    .team-rank {
-      display: inline-flex;
+    .fal-team-meta {
+      display: flex;
       align-items: center;
-      gap: 5px;
-      margin-top: 6px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.25);
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .fal-team-track-badge {
+      font-family: var(--font-chivo-mono, monospace);
       font-size: 10px;
       font-weight: 700;
-      color: #16a34a;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
     }
 
-    /* ── Mobile close button ──────────────────────── */
-    .lb-mobile-close {
-      display: none;
+    .fal-team-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
     }
+
+    .fal-shortlist-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-chivo-mono, monospace);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 4px;
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid rgba(22, 101, 52, 0.25);
+      white-space: nowrap;
+    }
+
+    /* Redesigned Architectural Empty State Card */
+    .fal-lb-empty-card {
+      background: #ffffff;
+      border: 1px solid var(--color-hairline-gray, #e5e7eb);
+      border-radius: 12px;
+      padding: 48px 32px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+    }
+
+    .fal-lb-empty-icon-wrap {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(97, 32, 238, 0.1) 0%, rgba(124, 58, 237, 0.18) 100%);
+      color: var(--color-electric-violet, #6120ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      border: 1px solid rgba(97, 32, 238, 0.2);
+    }
+
+    .fal-lb-empty-phase {
+      display: inline-block;
+      font-family: var(--font-chivo-mono, monospace);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--color-electric-violet, #6120ee);
+      background: #ede9fe;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .fal-lb-empty-title {
+      font-family: var(--font-focal);
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--color-ink-black, #000000);
+      margin: 0 0 10px;
+    }
+
+    .fal-lb-empty-desc {
+      font-family: var(--font-focal);
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--color-slate-body, #383a42);
+      max-width: 580px;
+      margin: 0 auto 32px;
+    }
+
+    /* 3-Stage Progress Timeline in Empty State */
+    .fal-lb-stepper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 720px;
+      margin: 0 auto 36px;
+      text-align: left;
+    }
+
+    .fal-lb-step-card {
+      background: var(--color-fog-surface, #f4f4f5);
+      border: 1px solid var(--color-hairline-gray, #e5e7eb);
+      border-radius: 8px;
+      padding: 16px 14px;
+      position: relative;
+    }
+
+    .fal-lb-step-card.active-step {
+      background: #ffffff;
+      border-color: var(--color-electric-violet, #6120ee);
+      box-shadow: 0 4px 14px rgba(97, 32, 238, 0.1);
+    }
+
+    .fal-lb-step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .fal-lb-step-badge {
+      font-family: var(--font-chivo-mono, monospace);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .fal-lb-step-badge.done {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .fal-lb-step-badge.current {
+      background: #ede9fe;
+      color: #6120ee;
+    }
+
+    .fal-lb-step-badge.pending {
+      background: #e2e8f0;
+      color: #64748b;
+    }
+
+    .fal-lb-step-name {
+      font-family: var(--font-focal);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--color-ink-black, #000000);
+      margin: 0 0 4px;
+    }
+
+    .fal-lb-step-desc {
+      font-family: var(--font-focal);
+      font-size: 12px;
+      color: var(--color-ash, #787882);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .fal-lb-empty-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Loading state */
+    .fal-lb-loading {
+      text-align: center;
+      padding: 64px 20px;
+    }
+
     @media (max-width: 768px) {
-      .lb-mobile-close {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        position: fixed;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 999;
-        background: var(--text-main);
-        color: #fff;
-        border: none;
-        border-radius: 50px;
-        padding: 14px 32px;
-        font-size: 15px;
-        font-weight: 700;
-        cursor: pointer;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-        text-decoration: none;
-        letter-spacing: 0.01em;
-        white-space: nowrap;
+      .fal-lb-main {
+        padding-top: 76px;
+        padding-bottom: 96px;
       }
-      .lb-mobile-close:active {
-        transform: translateX(-50%) scale(0.96);
+      .fal-lb-stepper {
+        grid-template-columns: 1fr;
+        gap: 10px;
       }
-      /* extra bottom padding so last card isn't hidden behind button */
-      .leaderboard-container {
-        padding-bottom: 100px;
+      .fal-team-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .fal-team-right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+      .fal-lb-empty-card {
+        padding: 32px 18px;
       }
     }
   </style>
 </head>
-<body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="container">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <a href="index.html" class="logo">
-          <div class="logo-icon" style="background: transparent; padding: 0;">
-            <img src="favicon.png" alt="HatchPoint Logo" style="width: 32px; height: 32px; object-fit: contain; border-radius: 8px;">
-          </div>
-          <span>Hatch<span class="logo-text-accent">Point</span></span>
+<body class="fal-layout fal-leaderboard-page">
+
+  <!-- Top Announcement Bar (Lilac Wash #d0b7f9 — hidden on mobile <= 768px) -->
+  <div class="fal-announcement-bar">
+    <span>✦ <strong>OFFICIAL LEADERBOARD:</strong> Displaying applicant teams reviewed and approved by administration &bull; <a href="index.html">Explore Challenge Overview →</a></span>
+  </div>
+
+  <!-- Navigation Bar (Glassmorphism Generative Design System) -->
+  <header class="fal-nav">
+    <div class="fal-nav-container">
+      <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+        <a href="index.html" class="fal-logo" id="nav-logo" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+          <img src="favicon.png" alt="HatchPoint Logo" style="width: 26px; height: 26px; object-fit: contain; border-radius: 4px;">
+          <span style="font-family: var(--font-focal); font-size: 20px; font-weight: 800; letter-spacing: -0.04em; color: var(--color-ink-black, #000000);">HATCHPOINT</span>
+          <span class="fal-logo-badge" style="background: var(--color-pixel-lime, #f1ffd2); color: var(--color-forest-pixel, #004012); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(0, 64, 18, 0.15);">NYANSAPO</span>
+        </a>
+        <div class="nav-logos fal-nav-cohosts" style="display: flex; align-items: center; gap: 8px; margin-left: 4px;">
+          <div style="width: 1px; height: 16px; background: var(--color-hairline-gray, #e5e7eb);"></div>
+          <img src="logo_knust.png" alt="KNUST Logo" style="height: 18px; width: auto; object-fit: contain;" title="KNUST">
+          <div style="width: 1px; height: 12px; background: var(--color-hairline-gray, #e5e7eb);"></div>
+          <img src="logo_ksb.png" alt="KSB Logo" style="height: 18px; width: auto; object-fit: contain;" title="KSB Innovations Lab">
+        </div>
+      </div>
+
+      <nav class="nav-links fal-nav-links">
+        <a href="index.html#tracks" class="fal-nav-link">Tracks</a>
+        <a href="index.html#about" class="fal-nav-link">Overview</a>
+        <a href="index.html#timeline" class="fal-nav-link">Milestones</a>
+        <a href="index.html#resources" class="fal-nav-link">Resources</a>
+        <a href="leaderboard.html" class="fal-nav-link active" style="color: var(--color-electric-violet, #6120ee); font-weight: 700;">Leaderboard</a>
+      </nav>
+
+      <div class="nav-auth">
+        <a href="index.html" class="fal-btn fal-btn-outline" style="padding: 7px 14px; height: 34px; font-size: 13px; border-radius: 4px;">
+          <i class="fa-solid fa-arrow-left" style="font-size: 11px;"></i> Back to Home
         </a>
       </div>
-      <div class="nav-auth">
-        <a href="index.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="fal-lb-main">
+    <div class="fal-lb-container">
+
+      <!-- Hero Header Block -->
+      <div class="fal-lb-header">
+        <span class="fal-logo-badge" style="background: var(--color-ink-black, #000000); color: var(--color-pixel-lime, #f1ffd2); font-family: var(--font-chivo-mono, monospace); font-size: 11px; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;">
+          ✦ OFFICIAL LEADERBOARD // ADMIN APPROVED TEAMS
+        </span>
+
+        <h1 style="font-family: var(--font-focal); font-size: clamp(32px, 5vw, 48px); font-weight: 900; letter-spacing: -0.04em; color: var(--color-ink-black, #000000); margin: 16px 0 10px; line-height: 1.05;">
+          Approved Teams.
+        </h1>
+
+        <p style="font-family: var(--font-focal); font-size: 16px; color: var(--color-slate-body, #383a42); max-width: 680px; line-height: 1.55; margin: 0;">
+          The official competition roster of student innovation teams reviewed and approved by the <strong>HatchPoint &amp; KSB Innovations Lab</strong> administration panel. Teams are displayed in randomized order to maintain strict parity.
+        </p>
+
+        <!-- Meta status strip -->
+        <div class="fal-lb-meta-strip">
+          <div class="fal-lb-meta-chip active-chip">
+            <span class="fal-lb-status-dot"></span>
+            <span>ADMIN REVIEW: ACTIVE</span>
+          </div>
+          <div class="fal-lb-meta-chip">
+            <i class="fa-solid fa-graduation-cap" style="color: var(--color-electric-violet, #6120ee); font-size: 12px;"></i>
+            <span>100–300L UNDERGRADS ONLY</span>
+          </div>
+          <div class="fal-lb-meta-chip">
+            <i class="fa-solid fa-shuffle" style="color: #0284c7; font-size: 11px;"></i>
+            <span>RANDOMIZED DISPLAY</span>
+          </div>
+          <div class="fal-lb-meta-chip" id="team-counter-chip" style="display: none;">
+            <i class="fa-solid fa-users-viewfinder" style="color: #10b981; font-size: 11px;"></i>
+            <span id="team-counter-text">0 Teams Approved</span>
+          </div>
+        </div>
       </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Shortlist Container -->
+      <div id="leaderboard-root">
+        <!-- Initial Loading State -->
+        <div class="fal-lb-loading">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size: 32px; color: var(--color-electric-violet, #6120ee); margin-bottom: 16px;"></i>
+          <p style="font-family: var(--font-focal); font-size: 14px; color: var(--color-ash, #787882); margin: 0;">
+            Retrieving official evaluation records...
+          </p>
+        </div>
+      </div>
+
     </div>
-  </nav>
+  </main>
 
-  <div class="leaderboard-header">
-    <h1 class="leaderboard-title">Official Shortlist</h1>
-    <p class="leaderboard-subtitle">Congratulations to the outstanding teams that have advanced to the next phase of The HatchPoint Innovations Challenge. Teams are displayed in no particular order.</p>
-  </div>
-
-  <div class="leaderboard-container" id="leaderboard-list">
-    <div class="loading-state">
-      <i class="fa-solid fa-spinner fa-spin" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
-      <p>Loading shortlisted teams...</p>
+  <!-- Clean Minimal Architectural Footer -->
+  <footer id="footer-section" style="margin-top: auto; background: var(--color-paper-white, #ffffff); border-top: 1px solid var(--color-hairline-gray, #e5e7eb); padding: 22px 0;">
+    <div class="fal-hero-container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-chivo-mono, monospace); font-size: 12px; color: var(--color-ash, #787882);">
+      <div>&copy; 2026 THE HATCHPOINT INNOVATIONS CHALLENGE: NYANSAPO EDITION.</div>
+      <div>KSB INNOVATIONS LAB &times; KNUST SCHOOL OF BUSINESS</div>
     </div>
-  </div>
-
-  <!-- Mobile close / back button -->
-  <a href="index.html" class="lb-mobile-close">
-    <i class="fa-solid fa-xmark"></i> Close
-  </a>
-
-  <footer style="margin-top: auto; padding: 24px 20px; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; background: transparent;">
-    &copy; 2026 The HatchPoint Innovations Challenge: Nyansapo Edition. All rights reserved.
   </footer>
 
-  <!-- Main Script -->
+  <!-- Mobile Bottom Navigation Bar -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html#home" class="mobile-bottom-nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="register.html" class="mobile-bottom-nav-item">
+      <i class="fa-solid fa-user-plus"></i>
+      <span>Register</span>
+    </a>
+    <a href="index.html#resources" class="mobile-bottom-nav-item">
+      <i class="fa-solid fa-folder-open"></i>
+      <span>Resources</span>
+    </a>
+    <a href="leaderboard.html" class="mobile-bottom-nav-item active">
+      <i class="fa-solid fa-trophy"></i>
+      <span>Shortlist</span>
+    </a>
+  </div>
+
+  <!-- FLOATING WHATSAPP GROUP WIDGET -->
+  <div id="whatsapp-floating-widget" style="display: none;">
+    <div class="whatsapp-menu-popup" id="whatsapp-menu-popup">
+      <div class="whatsapp-popup-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="wa-header-icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+          <div>
+            <h4 style="margin: 0; font-size: 14px; font-weight: 700; color: white;">HatchPoint Community</h4>
+            <span class="wa-online-status"><i class="fa-solid fa-circle"></i> Official Channel</span>
+          </div>
+        </div>
+        <button id="close-whatsapp-popup" aria-label="Close">&times;</button>
+      </div>
+      <div class="whatsapp-popup-body">
+        <p id="whatsapp-popup-text" style="font-size: 13px; color: #475569; margin: 0 0 14px; line-height: 1.5;">
+          Join our official HatchPoint WhatsApp community for live updates, evaluation announcements, and mentor support!
+        </p>
+        <a id="whatsapp-popup-join-btn" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-cta-btn">
+          <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i>
+          <span>Join WhatsApp Hub</span>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: auto; font-size: 13px; opacity: 0.85;"></i>
+        </a>
+      </div>
+    </div>
+    <div class="whatsapp-float-btn" id="whatsapp-float-btn" title="Join WhatsApp Hub">
+      <div class="whatsapp-pulse-ring"></div>
+      <i class="fa-brands fa-whatsapp"></i>
+      <span class="whatsapp-tooltip-badge" id="whatsapp-tooltip-badge">Join WhatsApp Hub</span>
+    </div>
+  </div>
+
+  <!-- FLOATING TIKTOK COMMUNITY WIDGET -->
+  <div id="tiktok-floating-widget" style="display: none;">
+    <div class="tiktok-menu-popup" id="tiktok-menu-popup">
+      <div class="tiktok-popup-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="tt-header-icon-box"><i class="fa-brands fa-tiktok"></i></div>
+          <div>
+            <h4 style="margin: 0; font-size: 14px; font-weight: 700; color: white;">HatchPoint on TikTok</h4>
+            <span class="tt-online-status"><i class="fa-solid fa-circle"></i> Official Channel</span>
+          </div>
+        </div>
+        <button id="close-tiktok-popup" aria-label="Close">&times;</button>
+      </div>
+      <div class="tiktok-popup-body">
+        <p id="tiktok-popup-text" style="font-size: 13px; color: #475569; margin: 0 0 14px; line-height: 1.5;">
+          Follow our official TikTok for challenge highlights, backstage moments, and announcements!
+        </p>
+        <a id="tiktok-popup-watch-btn" href="#" target="_blank" rel="noopener noreferrer" class="tiktok-cta-btn">
+          <i class="fa-brands fa-tiktok" style="font-size: 18px;"></i>
+          <span>Watch on TikTok</span>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: auto; font-size: 13px; opacity: 0.85;"></i>
+        </a>
+      </div>
+    </div>
+    <div class="tiktok-float-btn" id="tiktok-float-btn" title="Watch on TikTok">
+      <div class="tiktok-pulse-ring"></div>
+      <i class="fa-brands fa-tiktok"></i>
+      <span class="tiktok-tooltip-badge" id="tiktok-tooltip-badge">Watch on TikTok</span>
+    </div>
+  </div>
+
+  <!-- SUPPORT CHAT WIDGET (HATCHBOT AI) -->
+  <div id="support-chat-container">
+    <div class="chat-btn" id="support-chat-btn" aria-label="Ask HatchBot Support">
+      <div class="chat-pulse-ring"></div>
+      <span class="chat-status-dot"></span>
+      <span class="chat-tooltip-badge"><i class="fa-solid fa-sparkles" style="color: #f1ffd2; font-size: 10px;"></i> Ask HatchBot</span>
+      <svg class="chat-robot-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v4"></path>
+        <circle cx="12" cy="2" r="1" fill="currentColor"></circle>
+        <rect x="4" y="6" width="16" height="14" rx="4"></rect>
+        <circle cx="9" cy="12" r="1.2" fill="currentColor"></circle>
+        <circle cx="15" cy="12" r="1.2" fill="currentColor"></circle>
+        <path d="M9 15.5h6"></path>
+        <path d="M2 13h2"></path>
+        <path d="M20 13h2"></path>
+      </svg>
+    </div>
+    <div class="chat-modal" id="support-chat-modal">
+      <div class="chat-modal-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg class="chat-robot-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v4"></path>
+            <circle cx="12" cy="2" r="1" fill="currentColor"></circle>
+            <rect x="4" y="6" width="16" height="14" rx="4"></rect>
+            <circle cx="9" cy="12" r="1.2" fill="currentColor"></circle>
+            <circle cx="15" cy="12" r="1.2" fill="currentColor"></circle>
+            <path d="M9 15.5h6"></path>
+            <path d="M2 13h2"></path>
+            <path d="M20 13h2"></path>
+          </svg>
+          <span style="font-weight:700; font-family: var(--font-focal);">Ask HatchBot <span style="font-size: 10.5px; font-weight: 500; opacity: 0.85; margin-left: 4px; background: rgba(241, 255, 210, 0.15); color: #f1ffd2; padding: 2px 6px; border-radius: 4px;">24/7 AI</span></span>
+        </div>
+        <button id="close-support-chat">&times;</button>
+      </div>
+      <div class="chat-modal-body">
+        <p style="font-size: 13px; color: var(--text-light, #64748b); margin-bottom: 12px; line-height: 1.4;">Leave us a message and our organizing team will reply directly to your WhatsApp!</p>
+        <form id="support-chat-form">
+          <input type="text" id="chat-name" class="form-control" placeholder="Your Name" required style="margin-bottom: 8px; font-size: 13px; padding: 8px 12px; width: 100%; box-sizing: border-box;">
+          <input type="tel" id="chat-whatsapp" class="form-control" placeholder="WhatsApp Number (e.g. 050... or +233...)" required style="margin-bottom: 8px; font-size: 13px; padding: 8px 12px; width: 100%; box-sizing: border-box;">
+          <textarea id="chat-message" class="form-control" placeholder="How can we help?" required style="margin-bottom: 12px; font-size: 13px; padding: 8px 12px; min-height: 80px; resize: none; width: 100%; box-sizing: border-box;"></textarea>
+          <button type="submit" style="width: 100%; font-size: 13px; padding: 10px; cursor: pointer;">Send Message</button>
+        </form>
+        <div id="chat-success-msg" style="display: none; text-align: center; padding: 20px 0;">
+          <i class="fa-solid fa-circle-check" style="font-size: 32px; color: #16a34a; margin-bottom: 12px;"></i>
+          <h4 style="margin:0 0 4px; font-size:15px; color: #000000;">Message Sent!</h4>
+          <p style="margin:0; font-size:13px; color: #64748b;">We'll WhatsApp you shortly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase & Dynamic Leaderboard Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, query, where, getDocs, doc, setDoc, addDoc, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, collection, query, where, getDocs, doc, setDoc, addDoc, serverTimestamp, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA91WlL0vnYEYZcQo51KTDMWPPSw1eZayM",
@@ -233,62 +698,367 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Fetch and render approved projects
-    async function loadLeaderboard() {
-      const container = document.getElementById("leaderboard-list");
+    let allTeams = [];
+    let currentFilter = "all";
+    let searchQuery = "";
+
+    // Real-Time Listener for Approved Teams by Admin
+    function initLeaderboard() {
+      const root = document.getElementById("leaderboard-root");
+      const teamChip = document.getElementById("team-counter-chip");
+      const teamCounterText = document.getElementById("team-counter-text");
+
       try {
-        const q = query(collection(db, "projects"), where("status", "==", "Approved"));
-        const snapshot = await getDocs(q);
-        
-        let teams = [];
-        snapshot.forEach(doc => {
-          teams.push({ id: doc.id, ...doc.data() });
+        const q = collection(db, "projects");
+        onSnapshot(q, (snapshot) => {
+          allTeams = [];
+          snapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            // Include projects marked as Approved by admin
+            if (data.status && data.status.toLowerCase() === "approved") {
+              allTeams.push({ id: docSnap.id, ...data });
+            }
+          });
+
+          // If no teams approved yet by admin
+          if (allTeams.length === 0) {
+            root.innerHTML = renderEmptyState();
+            if (teamChip) teamChip.style.display = "none";
+            return;
+          }
+
+          // Shuffle teams (Fisher-Yates) for parity
+          for (let i = allTeams.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [allTeams[i], allTeams[j]] = [allTeams[j], allTeams[i]];
+          }
+
+          if (teamChip && teamCounterText) {
+            teamCounterText.textContent = `${allTeams.length} TEAMS APPROVED BY ADMIN`;
+            teamChip.style.display = "inline-flex";
+          }
+
+          renderPopulatedLeaderboard();
+        }, (err) => {
+          console.error("Leaderboard realtime error:", err);
+          getDocs(query(collection(db, "projects"), where("status", "==", "Approved")))
+            .then(snapshot => {
+              allTeams = [];
+              snapshot.forEach(d => allTeams.push({ id: d.id, ...d.data() }));
+              if (allTeams.length === 0) {
+                root.innerHTML = renderEmptyState();
+              } else {
+                renderPopulatedLeaderboard();
+              }
+            })
+            .catch(e => {
+              root.innerHTML = `
+                <div class="fal-lb-empty-card" style="border-color: #fca5a5;">
+                  <div class="fal-lb-empty-icon-wrap" style="background: #fee2e2; color: #dc2626;">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </div>
+                  <h3 class="fal-lb-empty-title">Unable to Load Approved Teams</h3>
+                  <p class="fal-lb-empty-desc">We encountered an issue syncing the admin records. Please check your internet connection or reload the page.</p>
+                  <button onclick="location.reload()" class="fal-btn fal-btn-dark">Reload Board</button>
+                </div>
+              `;
+            });
         });
 
-        if (teams.length === 0) {
-          container.innerHTML = `
-            <div class="empty-state">
-              <i class="fa-solid fa-trophy"></i>
-              <h3>No teams shortlisted yet</h3>
-              <p>The official shortlist will be published here once evaluations are complete.</p>
-            </div>
-          `;
-          return;
-        }
-
-        // Randomize array (Fisher-Yates shuffle) so there is no implied ranking
-        for (let i = teams.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [teams[i], teams[j]] = [teams[j], teams[i]];
-        }
-
-        container.innerHTML = teams.map((team, index) => {
-          const initial = team.teamName ? team.teamName.charAt(0).toUpperCase() : "T";
-          return `
-            <div class="team-card" style="animation-delay: ${index * 0.05}s">
-              <div class="team-avatar">${initial}</div>
-              <div class="team-info">
-                <div class="team-name">${team.teamName}</div>
-                <div class="team-rank"><i class="fa-solid fa-circle-check"></i> Shortlisted</div>
-              </div>
-            </div>
-          `;
-        }).join("");
-
       } catch (err) {
-        console.error("Error loading leaderboard:", err);
-        container.innerHTML = `<div class="loading-state"><p style="color: var(--danger);">Failed to load leaderboard. Please try again later.</p></div>`;
+        console.error("Leaderboard init error:", err);
       }
     }
 
-    // Load on page ready
+    // Render Empty State View (When Admin Has Not Approved Teams Yet)
+    function renderEmptyState() {
+      return `
+        <div class="fal-lb-empty-card">
+          <div class="fal-lb-empty-icon-wrap">
+            <i class="fa-solid fa-clipboard-check"></i>
+          </div>
+          <span class="fal-lb-empty-phase">ADMINISTRATIVE VERIFICATION PROTOCOL</span>
+          <h2 class="fal-lb-empty-title">No Teams Approved Yet</h2>
+          <p class="fal-lb-empty-desc">
+            Registered applicant teams are currently undergoing administrative vetting by the KSB Innovations Lab panel. Once a team's registration and eligibility criteria are reviewed and approved by the admin, their team card will be published live on this official leaderboard.
+          </p>
+
+          <!-- 3-Stage Progress Timeline -->
+          <div class="fal-lb-stepper">
+            <div class="fal-lb-step-card">
+              <div class="fal-lb-step-header">
+                <span class="fal-lb-step-badge done"><i class="fa-solid fa-check"></i> STAGE 01</span>
+                <span style="font-size: 11px; color: #16a34a; font-weight: 700;">Completed</span>
+              </div>
+              <h4 class="fal-lb-step-name">Team Registration</h4>
+              <p class="fal-lb-step-desc">Students submit team members, department credentials, and concept proposals.</p>
+            </div>
+
+            <div class="fal-lb-step-card active-step">
+              <div class="fal-lb-step-header">
+                <span class="fal-lb-step-badge current"><i class="fa-solid fa-spinner fa-spin"></i> STAGE 02</span>
+                <span style="font-size: 11px; color: #6120ee; font-weight: 700;">In Progress</span>
+              </div>
+              <h4 class="fal-lb-step-name">Admin Review &amp; Approval</h4>
+              <p class="fal-lb-step-desc">Administration panel verifies undergraduate standing (100–300L) and vetting criteria.</p>
+            </div>
+
+            <div class="fal-lb-step-card">
+              <div class="fal-lb-step-header">
+                <span class="fal-lb-step-badge pending">STAGE 03</span>
+                <span style="font-size: 11px; color: #64748b; font-weight: 600;">Upcoming</span>
+              </div>
+              <h4 class="fal-lb-step-name">Official Challenge Roster</h4>
+              <p class="fal-lb-step-desc">Approved teams appear live on this leaderboard to begin challenge milestones.</p>
+            </div>
+          </div>
+
+          <div class="fal-lb-empty-ctas">
+            <a href="register.html" class="fal-btn fal-btn-dark">
+              <i class="fa-solid fa-user-plus" style="margin-right: 6px;"></i> Submit Team for Approval
+            </a>
+            <a href="index.html#tracks" class="fal-btn fal-btn-outline">
+              <i class="fa-solid fa-compass" style="margin-right: 6px;"></i> Explore Challenge Tracks
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render Filter Toolbar + Cards Grid
+    function renderPopulatedLeaderboard() {
+      const root = document.getElementById("leaderboard-root");
+
+      root.innerHTML = `
+        <!-- Filter & Search Toolbar -->
+        <div class="fal-lb-toolbar">
+          <div class="fal-lb-search-wrap">
+            <i class="fa-solid fa-magnifying-glass fal-lb-search-icon"></i>
+            <input type="text" id="lb-search" class="fal-lb-search-input" placeholder="Search approved teams..." value="${searchQuery}">
+          </div>
+
+          <div class="fal-lb-filter-group">
+            <button class="fal-lb-filter-btn ${currentFilter === 'all' ? 'active' : ''}" data-filter="all">All Tracks</button>
+            <button class="fal-lb-filter-btn ${currentFilter === 'clean-energy' ? 'active' : ''}" data-filter="clean-energy">Clean Energy</button>
+            <button class="fal-lb-filter-btn ${currentFilter === 'fintech' ? 'active' : ''}" data-filter="fintech">FinTech</button>
+            <button class="fal-lb-filter-btn ${currentFilter === 'health' ? 'active' : ''}" data-filter="health">HealthTech</button>
+          </div>
+        </div>
+
+        <!-- Cards List -->
+        <div class="fal-lb-cards-grid" id="teams-grid"></div>
+      `;
+
+      // Attach search & filter handlers
+      const searchInput = document.getElementById("lb-search");
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          searchQuery = e.target.value.toLowerCase().trim();
+          updateCards();
+        });
+      }
+
+      const filterBtns = document.querySelectorAll(".fal-lb-filter-btn");
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          updateCards();
+        });
+      });
+
+      updateCards();
+    }
+
+    // Filter and update card list
+    function updateCards() {
+      const grid = document.getElementById("teams-grid");
+      if (!grid) return;
+
+      const filtered = allTeams.filter(team => {
+        const name = (team.teamName || "").toLowerCase();
+        const track = (team.track || "").toLowerCase();
+        const matchesSearch = !searchQuery || name.includes(searchQuery) || track.includes(searchQuery);
+
+        let matchesFilter = true;
+        if (currentFilter === "clean-energy") {
+          matchesFilter = track.includes("clean") || track.includes("energy") || track.includes("environment");
+        } else if (currentFilter === "fintech") {
+          matchesFilter = track.includes("fintech") || track.includes("fin");
+        } else if (currentFilter === "health") {
+          matchesFilter = track.includes("health") || track.includes("med");
+        }
+
+        return matchesSearch && matchesFilter;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="background: #ffffff; border: 1px dashed var(--color-hairline-gray, #e5e7eb); border-radius: 8px; padding: 36px 20px; text-align: center; color: var(--color-ash, #787882); font-family: var(--font-focal);">
+            <i class="fa-solid fa-filter" style="font-size: 24px; margin-bottom: 10px; opacity: 0.5;"></i>
+            <p style="margin: 0; font-size: 14px;">No approved teams matched your search or track filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((team, idx) => {
+        const initial = team.teamName ? team.teamName.charAt(0).toUpperCase() : "T";
+        const trackName = team.track || "Open Innovation Track";
+        const memberCount = Array.isArray(team.members) ? team.members.length : 3;
+
+        return `
+          <div class="fal-team-card">
+            <div class="fal-team-left">
+              <div class="fal-team-avatar">${initial}</div>
+              <div class="fal-team-info">
+                <h3 class="fal-team-name">${team.teamName || "Untitled Team"}</h3>
+                <div class="fal-team-meta">
+                  <span class="fal-team-track-badge"><i class="fa-solid fa-layer-group" style="margin-right: 4px;"></i> ${trackName}</span>
+                  <span class="fal-team-track-badge"><i class="fa-solid fa-users" style="margin-right: 4px;"></i> ${memberCount} Members</span>
+                </div>
+              </div>
+            </div>
+            <div class="fal-team-right">
+              <span class="fal-shortlist-badge" style="background: #dcfce7; color: #166534; border: 1px solid rgba(22, 101, 52, 0.25);">
+                <i class="fa-solid fa-circle-check" style="color: #16a34a;"></i>
+                <span>APPROVED BY ADMIN</span>
+              </span>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Document Ready Setup
     document.addEventListener("DOMContentLoaded", () => {
-      loadLeaderboard();
-      
+      initLeaderboard();
+
+      // Navbar scroll glassmorphism blur
+      const nav = document.querySelector(".fal-nav");
+      if (nav) {
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 15) {
+            nav.classList.add("is-scrolled");
+          } else {
+            nav.classList.remove("is-scrolled");
+          }
+        }, { passive: true });
+      }
+
+      // Support Chat logic
+      const chatBtn = document.getElementById("support-chat-btn");
+      const chatModal = document.getElementById("support-chat-modal");
+      const closeBtn = document.getElementById("close-support-chat");
+      const chatForm = document.getElementById("support-chat-form");
+      const successMsg = document.getElementById("chat-success-msg");
+
+      if (chatBtn && chatModal) {
+        chatBtn.addEventListener("click", () => {
+          chatModal.classList.toggle("active");
+        });
+      }
+
+      if (closeBtn && chatModal) {
+        closeBtn.addEventListener("click", () => {
+          chatModal.classList.remove("active");
+        });
+      }
+
+      if (chatForm) {
+        chatForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const name = document.getElementById("chat-name")?.value || "";
+          const phone = document.getElementById("chat-whatsapp")?.value || "";
+          const msg = document.getElementById("chat-message")?.value || "";
+
+          addDoc(collection(db, "support_messages"), {
+            name,
+            phone,
+            message: msg,
+            page: "leaderboard",
+            timestamp: serverTimestamp()
+          }).then(() => {
+            chatForm.style.display = "none";
+            if (successMsg) successMsg.style.display = "block";
+            setTimeout(() => {
+              if (chatModal) chatModal.classList.remove("active");
+              chatForm.reset();
+              chatForm.style.display = "block";
+              if (successMsg) successMsg.style.display = "none";
+            }, 3000);
+          }).catch(err => {
+            console.error("Support message error:", err);
+            alert("Could not deliver message. Please retry.");
+          });
+        });
+      }
+
+      // Sync WhatsApp config
+      onSnapshot(doc(db, "config", "whatsapp_settings"), (snap) => {
+        if (!snap.exists()) return;
+        const data = snap.data();
+        const waContainer = document.getElementById("whatsapp-floating-widget");
+        const waBtn = document.getElementById("whatsapp-float-btn");
+        const waPopup = document.getElementById("whatsapp-menu-popup");
+        const waJoinBtn = document.getElementById("whatsapp-popup-join-btn");
+        const waCloseBtn = document.getElementById("close-whatsapp-popup");
+
+        if (data.enabled === true && waContainer) {
+          waContainer.style.display = "flex";
+          if (data.groupLink && waJoinBtn) {
+            waJoinBtn.href = data.groupLink;
+          }
+          if (waBtn && waPopup) {
+            waBtn.addEventListener("click", () => {
+              if (data.mode === "direct" && data.groupLink) {
+                window.open(data.groupLink, "_blank", "noopener,noreferrer");
+              } else {
+                waPopup.classList.toggle("active");
+              }
+            });
+          }
+          if (waCloseBtn && waPopup) {
+            waCloseBtn.addEventListener("click", () => waPopup.classList.remove("active"));
+          }
+        }
+      });
+
+      // Sync TikTok config
+      onSnapshot(doc(db, "config", "tiktok_settings"), (snap) => {
+        if (!snap.exists()) return;
+        const data = snap.data();
+        const ttContainer = document.getElementById("tiktok-floating-widget");
+        const ttBtn = document.getElementById("tiktok-float-btn");
+        const ttPopup = document.getElementById("tiktok-menu-popup");
+        const ttWatchBtn = document.getElementById("tiktok-popup-watch-btn");
+        const ttCloseBtn = document.getElementById("close-tiktok-popup");
+
+        if (data.enabled === true && ttContainer) {
+          ttContainer.style.display = "flex";
+          if (data.profileUrl && ttWatchBtn) {
+            ttWatchBtn.href = data.profileUrl;
+          }
+          if (ttBtn && ttPopup) {
+            ttBtn.addEventListener("click", () => {
+              if (data.mode === "direct" && data.profileUrl) {
+                window.open(data.profileUrl, "_blank", "noopener,noreferrer");
+              } else {
+                ttPopup.classList.toggle("active");
+              }
+            });
+          }
+          if (ttCloseBtn && ttPopup) {
+            ttCloseBtn.addEventListener("click", () => ttPopup.classList.remove("active"));
+          }
+        }
+      });
+
       // Analytics Tracking
       const urlParams = new URLSearchParams(window.location.search);
       const isShareClick = urlParams.has("ref") && urlParams.get("ref") === "share";
-      
+
       setDoc(doc(db, "analytics", "traffic"), {
         total_page_views: increment(1)
       }, { merge: true }).catch(err => console.warn("Analytics Error:", err));
@@ -307,4 +1077,5 @@
     });
   </script>
 </body>
+
 </html>

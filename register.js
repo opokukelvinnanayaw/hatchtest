@@ -1220,3 +1220,12 @@ onSnapshot(doc(firestore, "config", "landing_stats"), (snapshot) => {
   updateRegCountdown();
   window.regCountdownIntervalId = setInterval(updateRegCountdown, 1000);
 });
+
+// Glassmorphism app bar: intensify blur once content scrolls underneath
+(function initGlassNavOnScroll() {
+  const nav = document.querySelector('.fal-nav');
+  if (!nav) return;
+  const update = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();

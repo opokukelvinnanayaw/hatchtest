@@ -296,6 +296,15 @@ function initMobileNavAutoHiding() {
 
 initMobileNavAutoHiding();
 
+// Glassmorphism app bar: intensify blur once content scrolls underneath
+(function initGlassNavOnScroll() {
+  const nav = document.querySelector(".fal-nav");
+  if (!nav) return;
+  const update = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+})();
+
 const navLogo = document.getElementById("nav-logo");
 if (navLogo) {
   navLogo.addEventListener("click", (e) => {
@@ -436,8 +445,8 @@ function renderLandingTimeline() {
         <div class="timeline-item ${activeClass}" data-step="${stepNum}" data-idx="${idx}">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
-              <div class="timeline-date" style="margin-bottom: 0;">PHASE 0${stepNum} // ${item.date}</div>
+            <div class="timeline-meta-row">
+              <div class="timeline-date">PHASE 0${stepNum} // ${item.date}</div>
               <span class="fal-badge" style="font-size: 10px; padding: 3px 8px; ${item.status === 'active' ? 'background: var(--color-pixel-lime, #f1ffd2); color: var(--color-forest-pixel, #004012); border: 1px solid rgba(0,64,18,0.2);' : 'background: var(--bg-surface-elevated, #f2f1ed); color: var(--text-secondary, #4a4a4a);'}">${statusLabel}</span>
             </div>
             <h3>${item.title}</h3>

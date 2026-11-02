@@ -276,8 +276,8 @@
 
         <div class="fal-hero-container">
           <div style="margin-bottom: 16px;">
-            <span class="fal-logo-badge" style="background: var(--color-ink-black, #000000); color: var(--color-pixel-lime, #f1ffd2); font-family: var(--font-chivo-mono, monospace); font-size: 11px; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;">
-              ✦ THE HATCHPOINT INNOVATIONS CHALLENGE // THE NYANSAPO EDITION
+            <span class="fal-logo-badge fal-hero-eyebrow" style="background: var(--color-ink-black, #000000); color: var(--color-pixel-lime, #f1ffd2); font-family: var(--font-chivo-mono, monospace); font-size: 11px; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;">
+              ✦ <span class="fal-eyebrow-full">THE HATCHPOINT INNOVATIONS CHALLENGE // THE NYANSAPO EDITION</span><span class="fal-eyebrow-short">HATCHPOINT // NYANSAPO EDITION</span>
             </span>
           </div>
 
@@ -305,71 +305,71 @@
         </div>
       </div>
 
-      <!-- ECOSYSTEM STATUS STRIP & COUNTDOWN (Compact & Clean) -->
-      <div style="background: #ffffff; border-bottom: 1px solid var(--color-hairline-gray, #e5e7eb); padding: 18px 0;">
-        <div class="fal-hero-container fal-status-strip-inner" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+      <!-- ECOSYSTEM STATUS STRIP & COUNTDOWN (Compact, Clean & Well-Spaced) -->
+      <div class="fal-status-strip">
+        <div class="fal-hero-container fal-status-strip-inner">
           <!-- Co-host & Live Registration Status -->
-          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;">
+          <div class="fal-status-brand-group">
             <div class="page-logos" style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--color-hairline-gray, #e5e7eb); padding: 5px 12px; border-radius: 4px;">
               <img src="logo_knust.png" alt="KNUST Logo" style="height: 16px; width: auto; object-fit: contain;">
               <div style="width: 1px; height: 12px; background: var(--color-hairline-gray, #e5e7eb);"></div>
               <img src="logo_ksb.png" alt="KSB Logo" style="height: 16px; width: auto; object-fit: contain;">
               <span style="font-family: var(--font-focal); font-size: 12px; font-weight: 700; color: var(--color-ink-black, #000000);">KSB Innovations Lab</span>
             </div>
-            <span class="fal-logo-badge" id="registration-status-tag" style="background: #f1ffd2; color: #166534; border: 1px solid rgba(22, 101, 52, 0.2); display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px;">
-              <i class="fa-solid fa-circle-nodes" style="font-size: 10px; color: #16a34a;"></i>
+            <span class="fal-logo-badge" id="registration-status-tag">
+              <i class="fa-solid fa-circle-nodes" style="font-size: 10px;"></i>
               Registration is open!
             </span>
           </div>
 
           <!-- Countdown Timer Widget -->
-          <div id="hero-countdown-wrapper" style="display: flex; align-items: center; gap: 12px;">
-            <div id="hero-countdown-text" class="hero-countdown-pill" style="margin: 0; font-family: var(--font-focal); font-size: 13px; font-weight: 600; color: var(--color-graphite, #1b1b1d); display: inline-flex; align-items: center; gap: 6px;">
-              <i class="fa-solid fa-clock-rotate-left" style="color: var(--color-electric-violet, #6120ee);"></i>
+          <div id="hero-countdown-wrapper">
+            <div id="hero-countdown-text" class="hero-countdown-pill">
+              <i class="fa-solid fa-clock-rotate-left"></i>
               <span class="hero-countdown-content">
                 <span class="hero-deadline-title"><span class="hero-full-title">Registration </span>Deadline:</span>
                 <strong id="hero-cd-live-status">Counting Down</strong>
               </span>
             </div>
 
-            <div class="countdown-widget" id="hero-countdown" style="margin: 0; background: #ffffff; border: 1px solid var(--color-hairline-gray, #e5e7eb); border-radius: 4px; padding: 4px 10px;">
+            <div class="countdown-widget" id="hero-countdown">
               <div class="countdown-unit">
-                <span class="countdown-num" id="cd-days" style="color: var(--color-ink-black, #000000); font-size: 14px;">--</span>
-                <span class="countdown-lbl" style="font-size: 10px;">Days</span>
+                <span class="countdown-num" id="cd-days">--</span>
+                <span class="countdown-lbl">Days</span>
               </div>
-              <div class="countdown-sep" style="color: var(--color-ink-black, #000000); font-size: 13px;">:</div>
+              <div class="countdown-sep">:</div>
               <div class="countdown-unit">
-                <span class="countdown-num" id="cd-hours" style="color: var(--color-ink-black, #000000); font-size: 14px;">--</span>
-                <span class="countdown-lbl" style="font-size: 10px;">Hours</span>
+                <span class="countdown-num" id="cd-hours">--</span>
+                <span class="countdown-lbl">Hours</span>
               </div>
-              <div class="countdown-sep" style="color: var(--color-ink-black, #000000); font-size: 13px;">:</div>
+              <div class="countdown-sep">:</div>
               <div class="countdown-unit">
-                <span class="countdown-num" id="cd-minutes" style="color: var(--color-ink-black, #000000); font-size: 14px;">--</span>
-                <span class="countdown-lbl" style="font-size: 10px;">Mins</span>
+                <span class="countdown-num" id="cd-minutes">--</span>
+                <span class="countdown-lbl">Mins</span>
               </div>
-              <div class="countdown-sep" style="color: var(--color-ink-black, #000000); font-size: 13px;">:</div>
+              <div class="countdown-sep">:</div>
               <div class="countdown-unit">
-                <span class="countdown-num" id="cd-seconds" style="color: var(--color-ink-black, #000000); font-size: 14px;">--</span>
-                <span class="countdown-lbl" style="font-size: 10px;">Secs</span>
+                <span class="countdown-num" id="cd-seconds">--</span>
+                <span class="countdown-lbl">Secs</span>
               </div>
             </div>
           </div>
 
           <!-- Dynamic Live Ecosystem Stats -->
-          <div style="display: flex; align-items: center; gap: 20px; justify-content: center;">
-            <div>
-              <span id="stat-participants" style="font-family: var(--font-focal); font-size: 17px; font-weight: 800; color: var(--color-ink-black, #000000);">--</span>
-              <span id="stat-participants-label" style="font-family: var(--font-focal); font-size: 11px; color: var(--color-ash, #787882); font-weight: 600; margin-left: 4px; text-transform: uppercase;">Participants</span>
+          <div class="fal-status-stats">
+            <div class="fal-stat-item">
+              <span id="stat-participants" class="fal-stat-num">--</span>
+              <span id="stat-participants-label" class="fal-stat-lbl">Participants</span>
             </div>
-            <div style="width: 1px; height: 16px; background: var(--color-hairline-gray, #e5e7eb);"></div>
-            <div>
-              <span id="stat-submissions" style="font-family: var(--font-focal); font-size: 17px; font-weight: 800; color: var(--color-ink-black, #000000);">--</span>
-              <span id="stat-submissions-label" style="font-family: var(--font-focal); font-size: 11px; color: var(--color-ash, #787882); font-weight: 600; margin-left: 4px; text-transform: uppercase;">Submissions</span>
+            <div class="fal-stat-divider"></div>
+            <div class="fal-stat-item">
+              <span id="stat-submissions" class="fal-stat-num">--</span>
+              <span id="stat-submissions-label" class="fal-stat-lbl">Submissions</span>
             </div>
-            <div id="dribbble-days-divider" style="width: 1px; height: 16px; background: var(--color-hairline-gray, #e5e7eb);"></div>
-            <div id="dribbble-days-stat">
-              <span id="stat-days" style="font-family: var(--font-focal); font-size: 17px; font-weight: 800; color: var(--color-ink-black, #000000);">--</span>
-              <span id="stat-days-label" style="font-family: var(--font-focal); font-size: 11px; color: var(--color-ash, #787882); font-weight: 600; margin-left: 4px; text-transform: uppercase;">Days Left</span>
+            <div id="dribbble-days-divider" class="fal-stat-divider"></div>
+            <div id="dribbble-days-stat" class="fal-stat-item">
+              <span id="stat-days" class="fal-stat-num">--</span>
+              <span id="stat-days-label" class="fal-stat-lbl">Days Left</span>
             </div>
           </div>
         </div>
@@ -777,9 +777,6 @@
                 <button id="faq-open-chat-btn" class="fal-btn fal-btn-dark" style="font-size: 13px; padding: 10px 18px;">
                   <i class="fa-solid fa-headset" style="margin-right: 6px;"></i> Ask HatchBot
                 </button>
-                <a href="#" id="faq-whatsapp-btn" class="fal-btn" style="background: #25d366; color: #ffffff !important; border-color: #25d366; font-size: 13px; padding: 10px 18px;">
-                  <i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> WhatsApp
-                </a>
               </div>
             </div>
 
@@ -1215,28 +1212,35 @@
 
   <!-- SUPPORT CHAT WIDGET -->
   <div id="support-chat-container">
-    <div class="chat-btn" id="support-chat-btn">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 8V4H8"></path>
-        <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-        <path d="M2 14h2"></path>
-        <path d="M20 14h2"></path>
-        <path d="M15 13v2"></path>
-        <path d="M9 13v2"></path>
+    <div class="chat-btn" id="support-chat-btn" aria-label="Ask HatchBot Support">
+      <div class="chat-pulse-ring"></div>
+      <span class="chat-status-dot"></span>
+      <span class="chat-tooltip-badge"><i class="fa-solid fa-sparkles" style="color: #f1ffd2; font-size: 10px;"></i> Ask HatchBot</span>
+      <svg class="chat-robot-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v4"></path>
+        <circle cx="12" cy="2" r="1" fill="currentColor"></circle>
+        <rect x="4" y="6" width="16" height="14" rx="4"></rect>
+        <circle cx="9" cy="12" r="1.2" fill="currentColor"></circle>
+        <circle cx="15" cy="12" r="1.2" fill="currentColor"></circle>
+        <path d="M9 15.5h6"></path>
+        <path d="M2 13h2"></path>
+        <path d="M20 13h2"></path>
       </svg>
     </div>
     <div class="chat-modal" id="support-chat-modal">
       <div class="chat-modal-header">
         <div style="display:flex; align-items:center; gap:8px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 8V4H8"></path>
-            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-            <path d="M2 14h2"></path>
-            <path d="M20 14h2"></path>
-            <path d="M15 13v2"></path>
-            <path d="M9 13v2"></path>
+          <svg class="chat-robot-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v4"></path>
+            <circle cx="12" cy="2" r="1" fill="currentColor"></circle>
+            <rect x="4" y="6" width="16" height="14" rx="4"></rect>
+            <circle cx="9" cy="12" r="1.2" fill="currentColor"></circle>
+            <circle cx="15" cy="12" r="1.2" fill="currentColor"></circle>
+            <path d="M9 15.5h6"></path>
+            <path d="M2 13h2"></path>
+            <path d="M20 13h2"></path>
           </svg>
-          <span style="font-weight:600;">Ask HatchBot</span>
+          <span style="font-weight:700; font-family: var(--font-focal);">Ask HatchBot <span style="font-size: 10.5px; font-weight: 500; opacity: 0.85; margin-left: 4px; background: rgba(241, 255, 210, 0.15); color: #f1ffd2; padding: 2px 6px; border-radius: 4px;">24/7 AI</span></span>
         </div>
         <button id="close-support-chat">&times;</button>
       </div>
